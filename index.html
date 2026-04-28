@@ -24,7 +24,6 @@
             line-height: 1.6;
         }
 
-        /* Hero-sektion */
         header {
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
             color: white;
@@ -50,51 +49,40 @@
 
         .container { max-width: 1100px; margin: -50px auto 50px; padding: 0 20px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; align-items: start; }
 
         .card {
             background: var(--card-bg);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
             border: 1px solid #e2e8f0;
+            height: 100%; /* Gör att korten försöker matcha varandra */
         }
 
-        .card:hover { transform: translateY(-5px); }
-
         h2 { color: var(--dark); margin-bottom: 15px; font-size: 1.6rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-        
-        /* Bild-styling */
+        h3 { color: var(--secondary); font-size: 1.1rem; margin: 20px 0 10px; }
+
         .image-box {
             width: 100%;
-            height: 250px; /* Standardhöjd för första bilden */
+            height: 250px;
             background: #f1f5f9;
             border-radius: 10px;
             margin: 20px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
-            border: 1px dashed #cbd5e1;
+            border: 1px solid #e2e8f0;
         }
 
-        /* Den högre boxen för funktion.png */
-        .image-box.tall-box {
-            height: 500px; 
-        }
+        .image-box.tall-box { height: 600px; } /* Matchar höjden på funktion-bilden */
 
-        .image-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ser till att bilden fyller ut boxen snyggt */
-        }
+        .image-box img { width: 100%; height: 100%; object-fit: cover; }
 
         .feature-list { list-style: none; margin-top: 15px; }
         .feature-list li {
             padding-left: 30px;
             position: relative;
             margin-bottom: 12px;
+            font-size: 0.95rem;
         }
 
         .feature-list li::before {
@@ -124,18 +112,9 @@
             border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
-            transition: 0.3s;
         }
-
-        .cta-button:hover { background: #fff; transform: scale(1.05); }
 
         footer { text-align: center; padding: 60px 40px; color: var(--text-muted); font-size: 0.9rem; }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .price-section { text-align: center; justify-content: center; gap: 20px; }
-            .image-box.tall-box { height: 350px; }
-        }
     </style>
 </head>
 <body>
@@ -143,57 +122,48 @@
 <header>
     <span class="badge">Early Access Analys</span>
     <h1>Nume.ai</h1>
-    <p>Utforska framtidens autonoma finanshantering – En AI-CFO för moderna företag.</p>
+    <p>AI-driven finansiell intelligens för moderna tillväxtbolag.</p>
 </header>
 
 <div class="container">
     <div class="grid">
         <div class="card">
             <h2>Om Nume.ai</h2>
-            <p><strong>Nume.ai</strong> (utvecklat av Scaleup Finance) är en avancerad AI-plattform som fungerar som en dygnet-runt-öppen ekonomichef. Genom att koppla ihop sig med företagets realtidsdata levererar den djupa finansiella insikter utan manuell handpåläggning.</p>
+            <p><strong>Nume.ai</strong> är framtaget av Scaleup Finance för att lösa ett av de största problemen för startups: bristen på finansiell överblick i realtid.</p>
             
             <div class="image-box">
-                <img src="startsida.png" alt="Översikt av Nume.ai">
+                <img src="startsida.png" alt="Nume.ai Dashboard">
             </div>
+
+            <h3>Hur det fungerar</h3>
+            <p>Verktyget agerar som ett "intelligent lager" ovanpå din befintliga bank och bokföring. Istället för att du ska logga in i flera olika system, samlar Nume in all data och presenterar den i ett enkelt format.</p>
             
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Huvudkontor: London & Köpenhamn. Verktyget bygger på SOC-2 certifierad infrastruktur för maximal säkerhet.</p>
+            <h3>Tekniken bakom</h3>
+            <p>Genom att använda stora språkmodeller (LLMs) som är specialtränade på finansiell terminologi, kan Nume förstå komplexa samband mellan intäkter och utgifter. Den kan identifiera trender som en människa lätt missar, till exempel små men återkommande kostnadsökningar.</p>
+
+            <h3>Säkerhet & Integritet</h3>
+            <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. Det innebär att din data är krypterad och att AI:n endast har läsrättigheter – den kan alltså aldrig flytta pengar eller ändra i din bokföring utan din tillåtelse.</p>
+            
+            <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">Skapat av erfarna CFOs för att säkerställa att de insikter som levereras är professionellt förankrade.</p>
         </div>
 
         <div class="card">
             <h2>Syfte & Funktioner</h2>
-            <p>Målet med Nume är att ge VD:ar och grundare kontroll över ekonomin utan att de behöver vara experter på bokföring.</p>
+            <p>Huvudsyftet med Nume är att sätta företagets finansiella hälsa på "autopilot", vilket sparar tid för både VD och ekonomiteam.</p>
             
             <div class="image-box tall-box">
-                <img src="funktion.png" alt="Detaljerad vy av Nume.ai funktioner">
+                <img src="funktion.png" alt="Nume.ai Autopilot">
             </div>
 
             <ul class="feature-list">
-                <li><strong>Kassaflödesanalys:</strong> Se exakt vart pengarna tar vägen i realtid.</li>
-                <li><strong>Slack-integration:</strong> Få smarta notiser när utgifter ändras.</li>
-                <li><strong>Inga hallucinationer:</strong> AI:n är tränad att prioritera exakt sifferdata.</li>
+                <li><strong>Dagliga kassarapporter:</strong> Ha alltid koll på likviditeten varje morgon.</li>
+                <li><strong>Veckovisa uppdateringar:</strong> Se hur ni ligger till mot budget.</li>
+                <li><strong>Månadsbokslut:</strong> Automatiserade sammanfattningar för styrelsen.</li>
+                <li><strong>Scenario-planering:</strong> Fråga AI:n "Vad händer om vi anställer tre personer till?".</li>
             </ul>
         </div>
     </div>
 
     <div class="card" style="margin-top: 25px;">
-        <h2>Analys & Utvärdering</h2>
-        <p><strong>Användarvänlighet:</strong> Nume.ai imponerar med sin enkla "onboarding". Man kopplar banken på under fem minuter och kan direkt börja ställa frågor i ett chattgränssnitt. Det sänker tröskeln för finansiell förståelse markant.</p>
-        
-        <p style="margin-top: 15px;"><strong>Begränsningar:</strong> Som en "Early Access"-tjänst kräver den molnbaserade system (som Xero eller Quickbooks). För bolag med gamla, lokala bokföringssystem är nyttan begränsad. Dessutom är kostnaden efter den 14 dagar långa provperioden en faktor att räkna med för små startups.</p>
-    </div>
-
-    <div class="price-section">
-        <div>
-            <h3>Starta din analys</h3>
-            <p>Testa Nume.ai gratis i 14 dagar för att se dina egna siffror.</p>
-        </div>
-        <a href="https://www.nume.ai" class="cta-button" target="_blank">Besök Nume.ai</a>
-    </div>
-
-    <footer>
-        <p>Skapad av <strong> Otto Jedeur-Palmgren </strong> | Kurs: AI1 | Källa: <a href="https://theresanaiforthat.com/" style="color:var(--primary); text-decoration: none;">There's An AI For That</a></p>
-    </footer>
-</div>
-
-</body>
-</html>
+        <h2>Slutsats & Utvärdering</h2>
+        <p>Nume.ai representerar den nya vågen av "Agentic AI" inom finanssektorn. Det är inte bara en sökbar databas, utan en aktiv partner som tänker pro
