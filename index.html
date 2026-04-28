@@ -57,7 +57,6 @@
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             border: 1px solid #e2e8f0;
-            height: 100%; /* Gör att korten försöker matcha varandra */
         }
 
         h2 { color: var(--dark); margin-bottom: 15px; font-size: 1.6rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
@@ -73,7 +72,7 @@
             border: 1px solid #e2e8f0;
         }
 
-        .image-box.tall-box { height: 600px; } /* Matchar höjden på funktion-bilden */
+        .image-box.tall-box { height: 600px; }
 
         .image-box img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -112,9 +111,13 @@
             border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
+            transition: 0.3s;
         }
 
+        .cta-button:hover { background: #fff; transform: scale(1.05); }
+
         footer { text-align: center; padding: 60px 40px; color: var(--text-muted); font-size: 0.9rem; }
+        footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -136,15 +139,13 @@
             </div>
 
             <h3>Hur det fungerar</h3>
-            <p>Verktyget agerar som ett "intelligent lager" ovanpå din befintliga bank och bokföring. Istället för att du ska logga in i flera olika system, samlar Nume in all data och presenterar den i ett enkelt format.</p>
+            <p>Verktyget agerar som ett "intelligent lager" ovanpå din befintliga bank och bokföring. Istället för att logga in i flera olika system, samlar Nume in all data och presenterar den i ett enkelt format direkt via webben eller Slack.</p>
             
             <h3>Tekniken bakom</h3>
             <p>Genom att använda stora språkmodeller (LLMs) som är specialtränade på finansiell terminologi, kan Nume förstå komplexa samband mellan intäkter och utgifter. Den kan identifiera trender som en människa lätt missar, till exempel små men återkommande kostnadsökningar.</p>
 
             <h3>Säkerhet & Integritet</h3>
             <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. Det innebär att din data är krypterad och att AI:n endast har läsrättigheter – den kan alltså aldrig flytta pengar eller ändra i din bokföring utan din tillåtelse.</p>
-            
-            <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">Skapat av erfarna CFOs för att säkerställa att de insikter som levereras är professionellt förankrade.</p>
         </div>
 
         <div class="card">
@@ -161,9 +162,29 @@
                 <li><strong>Månadsbokslut:</strong> Automatiserade sammanfattningar för styrelsen.</li>
                 <li><strong>Scenario-planering:</strong> Fråga AI:n "Vad händer om vi anställer tre personer till?".</li>
             </ul>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">Skapat av erfarna CFOs för att säkerställa att de insikter som levereras är professionellt förankrade.</p>
         </div>
     </div>
 
     <div class="card" style="margin-top: 25px;">
         <h2>Slutsats & Utvärdering</h2>
-        <p>Nume.ai representerar den nya vågen av "Agentic AI" inom finanssektorn. Det är inte bara en sökbar databas, utan en aktiv partner som tänker pro
+        <p>Nume.ai representerar den nya vågen av "Agentic AI" inom finanssektorn. Det är inte bara en sökbar databas, utan en aktiv partner som tänker proaktivt. För en student eller entreprenör som vill förstå kraften i nischad AI är Nume ett perfekt exempel på hur tekniken kan skapa mätbart värde.</p>
+        <p style="margin-top: 10px;"><strong>Begränsningar:</strong> Som en "Early Access"-tjänst kräver den molnbaserade system. Kostnaden efter den 14 dagar långa provperioden är också en faktor att räkna med för små startups.</p>
+    </div>
+
+    <div class="price-section">
+        <div>
+            <h3>Redo att börja?</h3>
+            <p>Använd Early Access och testa Nume.ai gratis i 14 dagar.</p>
+        </div>
+        <a href="https://www.nume.ai" class="cta-button" target="_blank">Besök Nume.ai</a>
+    </div>
+
+    <footer>
+        <p>Skapad av <strong>Otto Jedeur-Palmgren</strong> | Kurs: AI1 | 2026</p>
+        <p style="margin-top: 10px;">Källhänvisning: <a href="https://theresanaiforthat.com/" target="_blank">There's An AI For That (TAAFT)</a> & <a href="https://www.nume.ai" target="_blank">Nume.ai</a></p>
+    </footer>
+</div>
+
+</body>
+</html>
