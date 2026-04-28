@@ -1,29 +1,190 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Analys | Nume.ai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --dark: #0f172a;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Hero-sektion med gradient */
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+        }
+
+        .badge {
+            background: rgba(0, 210, 255, 0.2);
+            color: var(--primary);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--primary);
+        }
+
+        h1 { font-size: 3rem; margin: 20px 0; font-weight: 800; }
+        header p { font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto; }
+
+        .container { max-width: 1100px; margin: -50px auto 50px; padding: 0 20px; }
+
+        /* Snygga kort */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover { transform: translateY(-5px); }
+
+        h2 { color: var(--dark); margin-bottom: 15px; font-size: 1.5rem; }
+        
+        /* Bild-styling */
+        .image-box {
+            width: 100%;
+            height: 250px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .feature-list { list-style: none; }
+        .feature-list li {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .price-section {
+            background: var(--dark);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .cta-button:hover { background: #fff; transform: scale(1.05); }
+
+        footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .price-section { text-align: center; justify-content: center; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
 <header>
-    <span class="badge">Early Access Analysis</span>
-    <h1>Nume.ai – Framtidens AI CFO</h1>
-    <p>Projektuppgift i kursen AI1 | Analys av autonom finansiell intelligens</p>
+    <span class="badge">Early Access Analys</span>
+    <h1>Nume.ai</h1>
+    <p>Utforska framtidens autonoma finanshantering med AI-drivna CFO-insikter.</p>
 </header>
 
-<section>
-    <h2>Vad är Nume.ai?</h2>
-    <p>Nume är ett AI-verktyg skapat av <strong>Scaleup Finance</strong> som agerar som en digital ekonomichef. Genom att koppla ihop sig med företags bankkonton och bokföringssystem levererar den proaktiva insikter utan att användaren behöver gräva i kalkylark.</p>
-    <p><strong>Syfte:</strong> Att ge startups kontroll över sitt kassaflöde på autopilot.</p>
-</section>
+<div class="container">
+    <div class="grid">
+        <div class="card">
+            <h2>Om Nume.ai</h2>
+            <p>Nume är en revolutionerande <strong>AI CFO</strong> som automatiserar finansiell tillsyn för startups. Istället för statiska grafer får du en AI som tänker, analyserar och varnar proaktivt.</p>
+            <div class="image-box">
+                <img src="startsida.png" alt="Nume Dashboard Screenshot">
+                <span style="position:absolute; color:var(--text-muted); font-size:0.8rem;">[Ladda upp screenshot här]</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Skapat av: Scaleup Finance, London/Köpenhamn.</p>
+        </div>
 
-<section>
-    <h2>Analys av funktioner</h2>
-    <ul>
-        <li><strong>Realtidsövervakning:</strong> Analyserar transaktioner dygnet runt.</li>
-        <li><strong>Chatt-gränssnitt:</strong> Ställ komplexa frågor om företagets ekonomi och få svar direkt.</li>
-        <li><strong>Proaktiva notiser:</strong> Varnar via Slack om utgifter ökar oväntat.</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Målgrupp & Pris</h2>
-    <p>Verktyget är designat för <strong>startups och småbolag (SMEs)</strong>. Det fyller gapet mellan enkel bokföring och en dyr, mänsklig ekonomichef.</p>
-    <div class="price-tag">
-        <strong>Modell:</strong> 14 dagars gratis testperiod. Därefter prenumeration.<br>
-        <strong>Begränsning:</strong> Kräver koppling till externa system (API-baserat).
+        <div class="card">
+            <h2>Varför använda Nume?</h2>
+            <ul class="feature-list">
+                <li><strong>Realtidsinsikter:</strong> Ingen väntan på bokföraren.</li>
+                <li><strong>Proaktivitet:</strong> Upptäck oväntade kostnader direkt.</li>
+                <li><strong>Enkelhet:</strong> Fråga AI:n direkt via Slack eller webben.</li>
+                <li><strong>Säkerhet:</strong> SOC-2 certifierad och skrivskyddad data.</li>
+            </ul>
+            <div class="image-box">
+                <img src="funktion.png" alt="Nume Features">
+                <span style="position:absolute; color:var(--text-muted); font-size:0.8rem;">[Ladda upp screenshot här]</span>
+            </div>
+        </div>
     </div>
-</section>
+
+    <div class="card" style="margin-top: 25px;">
+        <h2>Min Analys & Testning</h2>
+        <p>Vid testning av Nume.ai imponerar enkelheten i onboardingen. På bara 5 minuter kopplas bankdata ihop med AI:n. En intressant observation är att verktyget inte bara visar data, utan faktiskt <em>förklarar</em> den – vilket gör att även icke-ekonomer kan fatta strategiska beslut.</p>
+    </div>
+
+    <div class="price-section">
+        <div>
+            <h3>Testa Nume.ai</h3>
+            <p>Gratis 14-dagars provperiod tillgänglig för nya användare.</p>
+        </div>
+        <a href="https://www.nume.ai" class="cta-button" target="_blank">Besök Nume.ai</a>
+    </div>
+
+    <footer>
+        <p>Skapad av [Ditt Namn] | AI1 Kursen | Källa: <a href="https://theresanaiforthat.com/" style="color:var(--primary);">TAAFT</a></p>
+    </footer>
+</div>
+
+</body>
+</html>
