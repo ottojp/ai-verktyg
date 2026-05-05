@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,7 @@
             --card-bg: #ffffff;
             --text-main: #1e293b;
             --text-muted: #64748b;
-            --page-bg: #f0f7ff; /* Väldigt ljus blå bakgrund */
+            --page-bg: #f0f7ff; 
             --accent: #f1f5f9;
         }
 
@@ -35,7 +35,7 @@
         header {
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
             color: white;
-            padding: 100px 20px 140px; /* Mer padding i botten för att ge plats åt överlappet */
+            padding: 100px 20px 160px; 
             text-align: center;
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
         }
@@ -52,28 +52,28 @@
             border: 1px solid var(--primary);
         }
 
-        h1 { font-size: 3.5rem; margin: 20px 0; font-weight: 800; }
-        header p { font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto; }
+        h1 { font-size: 4rem; margin: 20px 0; font-weight: 800; }
+        header p { font-size: 1.4rem; opacity: 0.8; max-width: 800px; margin: 0 auto; }
 
         .container { 
-            max-width: 1100px; 
-            margin: -100px auto 50px; /* Drar upp hela gridden över headern */
-            padding: 0 20px; 
+            max-width: 1300px; /* Ökad bredd för att fylla ut skärmen bättre */
+            margin: -120px auto 50px; 
+            padding: 0 30px; 
             position: relative;
             z-index: 10;
         }
 
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-            gap: 25px; 
+            grid-template-columns: repeat(2, 1fr); /* Tvingar två kolumner på breda skärmar */
+            gap: 30px; 
             align-items: start; 
         }
 
         .card {
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
+            padding: 40px; /* Mer luft inuti korten för premiumkänsla */
+            border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             border: 1px solid #e2e8f0;
             transition: all 0.3s ease;
@@ -86,49 +86,54 @@
 
         .full-width { 
             grid-column: 1 / -1; 
-            margin-top: 10px; /* Litet mellanrum till de övre korten */
+            margin-top: 10px;
         }
 
-        h2 { color: var(--dark); margin-bottom: 15px; font-size: 1.6rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-        h3 { color: var(--secondary); font-size: 1.1rem; margin: 20px 0 10px; }
+        h2 { color: var(--dark); margin-bottom: 20px; font-size: 1.8rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+        h3 { color: var(--secondary); font-size: 1.2rem; margin: 25px 0 15px; }
 
         .image-box {
             width: 100%;
-            height: 250px;
+            height: 300px; /* Något högre standardbild */
             background: #f1f5f9;
-            border-radius: 10px;
-            margin: 20px 0;
+            border-radius: 12px;
+            margin: 25px 0;
             overflow: hidden;
             border: 1px solid #e2e8f0;
         }
 
-        .image-box.tall-box { height: 600px; }
+        .image-box.tall-box { height: 700px; } /* Ökad höjd för att matcha den bredare layouten */
 
         .image-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .image-box:hover img { transform: scale(1.05); }
 
-        /* Process Flow */
-        .flow-wrapper { display: flex; justify-content: space-around; margin: 20px 0; padding: 20px; background: #f8fafc; border-radius: 10px; }
-        .flow-item { text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
-        .flow-icon { font-size: 1.8rem; display: block; margin-bottom: 5px; }
+        .flow-wrapper { display: flex; justify-content: space-around; margin: 30px 0; padding: 30px; background: #f8fafc; border-radius: 12px; }
+        .flow-item { text-align: center; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); }
+        .flow-icon { font-size: 2.2rem; display: block; margin-bottom: 8px; }
 
-        /* Chatt-bubbla */
-        .chat-container { border: 1px solid #e2e8f0; border-radius: 10px; padding: 15px; background: white; max-width: 500px; margin: 20px auto; }
-        .bubble { padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; font-size: 0.9rem; max-width: 80%; }
+        .chat-container { border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: white; width: 100%; max-width: 600px; margin: 20px auto; }
+        .bubble { padding: 12px 18px; border-radius: 18px; margin-bottom: 12px; font-size: 1rem; max-width: 85%; }
         .user { background: #f1f5f9; color: var(--text-main); }
         .ai { background: var(--primary); color: white; margin-left: auto; }
 
-        .tech-pill { background: #f1f5f9; color: #475569; padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: 600; margin-right: 5px; display: inline-block; }
+        .tech-pill { background: #f1f5f9; color: #475569; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; margin-right: 8px; display: inline-block; }
 
         .feature-list { list-style: none; margin-top: 15px; }
-        .feature-list li { padding-left: 30px; position: relative; margin-bottom: 12px; font-size: 0.95rem; }
-        .feature-list li::before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+        .feature-list li { padding-left: 35px; position: relative; margin-bottom: 15px; font-size: 1rem; }
+        .feature-list li::before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-weight: bold; font-size: 1.2rem; }
 
-        .price-section { background: var(--dark); color: white; padding: 40px; border-radius: 15px; margin-top: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .cta-button { background: var(--primary); color: var(--dark); padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 700; transition: 0.3s; }
+        .price-section { background: var(--dark); color: white; padding: 60px; border-radius: 20px; margin-top: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .cta-button { background: var(--primary); color: var(--dark); padding: 18px 35px; border-radius: 10px; text-decoration: none; font-weight: 700; transition: 0.3s; font-size: 1.1rem; }
         .cta-button:hover { background: #fff; transform: scale(1.05); }
 
-        footer { text-align: center; padding: 60px 40px; color: var(--text-muted); font-size: 0.9rem; }
+        footer { text-align: center; padding: 80px 40px; color: var(--text-muted); font-size: 1rem; }
+
+        /* Fix för mobiler så det inte kraschar */
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2.8rem; }
+            .container { margin-top: -80px; }
+        }
     </style>
 </head>
 <body>
@@ -179,7 +184,7 @@
 
         <!-- NEDRE BRED BUBBLA -->
         <div class="card full-width">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; align-items: center;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 50px; align-items: center;">
                 <div>
                     <h2>AI-Interaktion & Flöde</h2>
                     <p>Här ser vi hur Nume.ai bryter ner dataflödet och hur användaren interagerar med tekniken genom naturligt språk.</p>
@@ -190,7 +195,7 @@
                         <div class="flow-item"><span class="flow-icon">📊</span>INSIKT</div>
                     </div>
                     
-                    <div style="background: #fff9eb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; font-size: 0.9rem;">
+                    <div style="background: #fff9eb; padding: 20px; border-left: 5px solid #f59e0b; border-radius: 6px; font-size: 1rem;">
                         <strong>Etisk notering:</strong> För att undvika hallucinationer använder Nume deterministisk logik för beräkningar kombinerat med LLM för tolkning.
                     </div>
                 </div>
@@ -211,7 +216,7 @@
     </div>
 
     <!-- Slutsats -->
-    <div class="card" style="margin-top: 25px;">
+    <div class="card" style="margin-top: 30px;">
         <h2>Min Analys</h2>
         <p>Nume.ai representerar den nya vågen av "Agentic AI". Det är inte bara en databas, utan en aktiv partner. För företag innebär detta att de kan skala utan att drabbas av administrativ skuld. Det är ett perfekt exempel på hur nischad AI skapar verkligt affärsvärde.</p>
     </div>
