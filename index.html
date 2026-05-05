@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
@@ -19,6 +19,7 @@
             --card-bg: #ffffff;
             --text-main: #1e293b;
             --text-muted: #64748b;
+            --page-bg: #f0f7ff; /* Väldigt ljus blå bakgrund */
             --accent: #f1f5f9;
         }
 
@@ -26,7 +27,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            background-color: var(--page-bg);
             color: var(--text-main);
             line-height: 1.6;
         }
@@ -34,7 +35,7 @@
         header {
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
             color: white;
-            padding: 80px 20px;
+            padding: 100px 20px 140px; /* Mer padding i botten för att ge plats åt överlappet */
             text-align: center;
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
         }
@@ -54,9 +55,20 @@
         h1 { font-size: 3.5rem; margin: 20px 0; font-weight: 800; }
         header p { font-size: 1.2rem; opacity: 0.8; max-width: 600px; margin: 0 auto; }
 
-        .container { max-width: 1100px; margin: -50px auto 50px; padding: 0 20px; }
+        .container { 
+            max-width: 1100px; 
+            margin: -100px auto 50px; /* Drar upp hela gridden över headern */
+            padding: 0 20px; 
+            position: relative;
+            z-index: 10;
+        }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; align-items: start; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 25px; 
+            align-items: start; 
+        }
 
         .card {
             background: var(--card-bg);
@@ -72,7 +84,10 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
 
-        .full-width { grid-column: 1 / -1; }
+        .full-width { 
+            grid-column: 1 / -1; 
+            margin-top: 10px; /* Litet mellanrum till de övre korten */
+        }
 
         h2 { color: var(--dark); margin-bottom: 15px; font-size: 1.6rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
         h3 { color: var(--secondary); font-size: 1.1rem; margin: 20px 0 10px; }
@@ -126,7 +141,7 @@
 
 <div class="container">
     <div class="grid">
-        <!-- VÄNSTER KORT (Återställd design) -->
+        <!-- VÄNSTER KORT -->
         <div class="card">
             <h2>Om Nume.ai</h2>
             <p><strong>Nume.ai</strong> är framtaget av Scaleup Finance för att lösa ett av de största problemen för startups: bristen på finansiell överblick i realtid.</p>
@@ -145,7 +160,7 @@
             <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. AI:n har endast läsrättigheter – den kan alltså aldrig flytta pengar utan din tillåtelse.</p>
         </div>
 
-        <!-- HÖGER KORT (Återställd design) -->
+        <!-- HÖGER KORT -->
         <div class="card">
             <h2>Syfte & Funktioner</h2>
             <p>Huvudsyftet med Nume är att sätta företagets finansiella hälsa på "autopilot", vilket sparar tid för både VD och ekonomiteam.</p>
@@ -162,7 +177,7 @@
             </ul>
         </div>
 
-        <!-- NY BUBBLA (Interaktivitet & Fördjupning) -->
+        <!-- NEDRE BRED BUBBLA -->
         <div class="card full-width">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; align-items: center;">
                 <div>
