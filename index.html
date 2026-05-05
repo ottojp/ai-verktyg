@@ -19,7 +19,7 @@
             --card-bg: #ffffff;
             --text-main: #1e293b;
             --text-muted: #64748b;
-            --page-bg: #e0f0ff; /* Uppdaterad till en något mörkare men fortfarande ljus blå */
+            --page-bg: #e0f0ff; 
             --accent: #f1f5f9;
         }
 
@@ -163,10 +163,11 @@
         .image-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
         .image-box:hover img { transform: scale(1.08); }
 
-        .flow-wrapper { display: flex; justify-content: space-around; margin: 30px 0; padding: 30px; background: #f8fafc; border-radius: 16px; border: 1px solid #edf2f7; }
+        .flow-wrapper { display: flex; justify-content: space-around; align-items: center; margin: 30px 0; padding: 30px; background: #f8fafc; border-radius: 16px; border: 1px solid #edf2f7; }
         .flow-item { text-align: center; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); transition: 0.3s; cursor: default; }
         .flow-item:hover { transform: scale(1.1); color: var(--secondary); }
         .flow-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+        .flow-arrow { font-size: 1.5rem; color: var(--primary); font-weight: bold; opacity: 0.6; }
 
         .chat-container { border: 1px solid #e2e8f0; border-radius: 16px; padding: 25px; background: white; width: 100%; max-width: 600px; margin: 20px auto; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
         .bubble { padding: 14px 20px; border-radius: 20px; margin-bottom: 12px; font-size: 1rem; max-width: 85%; transition: 0.3s; }
@@ -195,6 +196,8 @@
             h1 { font-size: 3rem; }
             .container { margin-top: -100px; }
             .card-left, .card-right { animation: fadeInUp 1s ease; }
+            .flow-arrow { transform: rotate(90deg); margin: 10px 0; }
+            .flow-wrapper { flex-direction: column; }
         }
     </style>
 </head>
@@ -254,7 +257,9 @@
                     
                     <div class="flow-wrapper">
                         <div class="flow-item"><span class="flow-icon">🏦</span>BANKDATA</div>
+                        <div class="flow-arrow">→</div>
                         <div class="flow-item"><span class="flow-icon">⚙️</span>AI-ANALYS</div>
+                        <div class="flow-arrow">→</div>
                         <div class="flow-item"><span class="flow-icon">📊</span>INSIKT</div>
                     </div>
                     
