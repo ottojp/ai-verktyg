@@ -23,6 +23,28 @@
             --accent: #f1f5f9;
         }
 
+        /* Animationer */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
@@ -30,14 +52,26 @@
             background-color: var(--page-bg);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         header {
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            position: relative;
             color: white;
-            padding: 100px 20px 160px; 
+            padding: 120px 20px 180px; 
             text-align: center;
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+        }
+
+        /* Tech-mönster i bakgrunden på header */
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
         }
 
         .badge {
@@ -48,16 +82,18 @@
             font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             border: 1px solid var(--primary);
+            display: inline-block;
+            animation: fadeInUp 0.8s ease;
         }
 
-        h1 { font-size: 4rem; margin: 20px 0; font-weight: 800; }
-        header p { font-size: 1.4rem; opacity: 0.8; max-width: 800px; margin: 0 auto; }
+        h1 { font-size: 4.5rem; margin: 20px 0; font-weight: 800; letter-spacing: -2px; animation: fadeInUp 1s ease; }
+        header p { font-size: 1.5rem; opacity: 0.9; max-width: 800px; margin: 0 auto; font-weight: 300; animation: fadeInUp 1.2s ease; }
 
         .container { 
-            max-width: 1300px; /* Ökad bredd för att fylla ut skärmen bättre */
-            margin: -120px auto 50px; 
+            max-width: 1300px; 
+            margin: -130px auto 50px; 
             padding: 0 30px; 
             position: relative;
             z-index: 10;
@@ -65,23 +101,29 @@
 
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(2, 1fr); /* Tvingar två kolumner på breda skärmar */
+            grid-template-columns: repeat(2, 1fr); 
             gap: 30px; 
             align-items: start; 
         }
 
         .card {
             background: var(--card-bg);
-            padding: 40px; /* Mer luft inuti korten för premiumkänsla */
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
+            padding: 40px; 
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
+        /* Animation för korten */
+        .card-left { animation: slideInLeft 1s ease-out; }
+        .card-right { animation: slideInRight 1s ease-out; }
+        .card-bottom { animation: fadeInUp 1.2s ease-out; }
+
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.1);
+            border-color: var(--primary);
         }
 
         .full-width { 
@@ -89,50 +131,73 @@
             margin-top: 10px;
         }
 
+        /* Live Indicator */
+        .live-status {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #22c55e;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .pulse-dot {
+            width: 8px; height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
         h2 { color: var(--dark); margin-bottom: 20px; font-size: 1.8rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
         h3 { color: var(--secondary); font-size: 1.2rem; margin: 25px 0 15px; }
 
         .image-box {
             width: 100%;
-            height: 300px; /* Något högre standardbild */
+            height: 300px;
             background: #f1f5f9;
-            border-radius: 12px;
+            border-radius: 16px;
             margin: 25px 0;
             overflow: hidden;
             border: 1px solid #e2e8f0;
         }
 
-        .image-box.tall-box { height: 700px; } /* Ökad höjd för att matcha den bredare layouten */
+        .image-box.tall-box { height: 700px; }
+        .image-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
+        .image-box:hover img { transform: scale(1.08); }
 
-        .image-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .image-box:hover img { transform: scale(1.05); }
+        .flow-wrapper { display: flex; justify-content: space-around; margin: 30px 0; padding: 30px; background: #f8fafc; border-radius: 16px; border: 1px solid #edf2f7; }
+        .flow-item { text-align: center; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); transition: 0.3s; cursor: default; }
+        .flow-item:hover { transform: scale(1.1); color: var(--secondary); }
+        .flow-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
 
-        .flow-wrapper { display: flex; justify-content: space-around; margin: 30px 0; padding: 30px; background: #f8fafc; border-radius: 12px; }
-        .flow-item { text-align: center; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); }
-        .flow-icon { font-size: 2.2rem; display: block; margin-bottom: 8px; }
+        .chat-container { border: 1px solid #e2e8f0; border-radius: 16px; padding: 25px; background: white; width: 100%; max-width: 600px; margin: 20px auto; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .bubble { padding: 14px 20px; border-radius: 20px; margin-bottom: 12px; font-size: 1rem; max-width: 85%; transition: 0.3s; }
+        .user { background: #f1f5f9; color: var(--text-main); border-bottom-left-radius: 4px; }
+        .ai { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; margin-left: auto; border-bottom-right-radius: 4px; box-shadow: 0 4px 12px rgba(0, 210, 255, 0.2); }
 
-        .chat-container { border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: white; width: 100%; max-width: 600px; margin: 20px auto; }
-        .bubble { padding: 12px 18px; border-radius: 18px; margin-bottom: 12px; font-size: 1rem; max-width: 85%; }
-        .user { background: #f1f5f9; color: var(--text-main); }
-        .ai { background: var(--primary); color: white; margin-left: auto; }
+        .tech-pill { background: #f1f5f9; color: #475569; padding: 6px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; margin-right: 8px; display: inline-block; border: 1px solid #e2e8f0; }
 
-        .tech-pill { background: #f1f5f9; color: #475569; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; margin-right: 8px; display: inline-block; }
+        .feature-list li { padding-left: 35px; position: relative; margin-bottom: 18px; font-size: 1.05rem; }
+        .feature-list li::before { content: '✦'; position: absolute; left: 0; color: var(--primary); font-weight: bold; font-size: 1.2rem; }
 
-        .feature-list { list-style: none; margin-top: 15px; }
-        .feature-list li { padding-left: 35px; position: relative; margin-bottom: 15px; font-size: 1rem; }
-        .feature-list li::before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-weight: bold; font-size: 1.2rem; }
+        .price-section { 
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: white; padding: 60px; border-radius: 24px; margin-top: 40px; 
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
 
-        .price-section { background: var(--dark); color: white; padding: 60px; border-radius: 20px; margin-top: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .cta-button { background: var(--primary); color: var(--dark); padding: 18px 35px; border-radius: 10px; text-decoration: none; font-weight: 700; transition: 0.3s; font-size: 1.1rem; }
-        .cta-button:hover { background: #fff; transform: scale(1.05); }
+        .cta-button { background: var(--primary); color: var(--dark); padding: 18px 40px; border-radius: 12px; text-decoration: none; font-weight: 800; transition: 0.3s; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3); }
+        .cta-button:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255,255,255,0.2); }
 
-        footer { text-align: center; padding: 80px 40px; color: var(--text-muted); font-size: 1rem; }
+        footer { text-align: center; padding: 100px 40px; color: var(--text-muted); font-size: 1rem; }
 
-        /* Fix för mobiler så det inte kraschar */
-        @media (max-width: 900px) {
+        @media (max-width: 950px) {
             .grid { grid-template-columns: 1fr; }
-            h1 { font-size: 2.8rem; }
-            .container { margin-top: -80px; }
+            h1 { font-size: 3rem; }
+            .container { margin-top: -100px; }
+            .card-left, .card-right { animation: fadeInUp 1s ease; }
         }
     </style>
 </head>
@@ -141,13 +206,14 @@
 <header>
     <span class="badge">Early Access Analys</span>
     <h1>Nume.ai</h1>
-    <p>AI-driven finansiell intelligens för moderna tillväxtbolag.</p>
+    <p>The Operating System for Finance Teams</p>
 </header>
 
 <div class="container">
     <div class="grid">
         <!-- VÄNSTER KORT -->
-        <div class="card">
+        <div class="card card-left">
+            <div class="live-status"><span class="pulse-dot"></span>Live Analysis Active</div>
             <h2>Om Nume.ai</h2>
             <p><strong>Nume.ai</strong> är framtaget av Scaleup Finance för att lösa ett av de största problemen för startups: bristen på finansiell överblick i realtid.</p>
             
@@ -166,7 +232,7 @@
         </div>
 
         <!-- HÖGER KORT -->
-        <div class="card">
+        <div class="card card-right">
             <h2>Syfte & Funktioner</h2>
             <p>Huvudsyftet med Nume är att sätta företagets finansiella hälsa på "autopilot", vilket sparar tid för både VD och ekonomiteam.</p>
             
@@ -174,7 +240,7 @@
                 <img src="funktion.png" alt="Nume.ai Autopilot">
             </div>
 
-            <ul class="feature-list">
+            <ul class="feature-list" style="list-style: none;">
                 <li><strong>Dagliga kassarapporter:</strong> Ha alltid koll på likviditeten.</li>
                 <li><strong>Veckovisa uppdateringar:</strong> Se hur ni ligger till mot budget.</li>
                 <li><strong>Månadsbokslut:</strong> Automatiserade sammanfattningar.</li>
@@ -183,7 +249,7 @@
         </div>
 
         <!-- NEDRE BRED BUBBLA -->
-        <div class="card full-width">
+        <div class="card full-width card-bottom">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 50px; align-items: center;">
                 <div>
                     <h2>AI-Interaktion & Flöde</h2>
@@ -195,7 +261,7 @@
                         <div class="flow-item"><span class="flow-icon">📊</span>INSIKT</div>
                     </div>
                     
-                    <div style="background: #fff9eb; padding: 20px; border-left: 5px solid #f59e0b; border-radius: 6px; font-size: 1rem;">
+                    <div style="background: #fff9eb; padding: 25px; border-left: 5px solid #f59e0b; border-radius: 12px; font-size: 1rem; color: #92400e;">
                         <strong>Etisk notering:</strong> För att undvika hallucinationer använder Nume deterministisk logik för beräkningar kombinerat med LLM för tolkning.
                     </div>
                 </div>
@@ -205,10 +271,10 @@
                         <div class="bubble user">"Hur ser vår kassa ut om 3 månader?"</div>
                         <div class="bubble ai">"Baserat på nuvarande burn-rate beräknas ni ha 1.2M SEK i likvida medel."</div>
                     </div>
-                    <div style="text-align: center;">
-                        <span class="tech-pill">GPT-4</span>
-                        <span class="tech-pill">RAG</span>
-                        <span class="tech-pill">Real-time API</span>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <span class="tech-pill">GPT-4o</span>
+                        <span class="tech-pill">RAG Engine</span>
+                        <span class="tech-pill">Financial LLM</span>
                     </div>
                 </div>
             </div>
@@ -216,14 +282,14 @@
     </div>
 
     <!-- Slutsats -->
-    <div class="card" style="margin-top: 30px;">
+    <div class="card card-bottom" style="margin-top: 30px;">
         <h2>Min Analys</h2>
         <p>Nume.ai representerar den nya vågen av "Agentic AI". Det är inte bara en databas, utan en aktiv partner. För företag innebär detta att de kan skala utan att drabbas av administrativ skuld. Det är ett perfekt exempel på hur nischad AI skapar verkligt affärsvärde.</p>
     </div>
 
-    <div class="price-section">
+    <div class="price-section card-bottom">
         <div>
-            <h3>Redo att börja?</h3>
+            <h3 style="color: var(--primary); margin: 0 0 10px 0;">Redo att börja?</h3>
             <p>Testa Nume.ai gratis i 14 dagar.</p>
         </div>
         <a href="https://www.nume.ai" class="cta-button" target="_blank">Besök Nume.ai</a>
@@ -231,7 +297,7 @@
 
     <footer>
         <p>Skapad av <strong>Otto Jedeur-Palmgren</strong> | Kurs: AI1 | 2026</p>
-        <p style="margin-top: 10px;">Källor: <a href="https://theresanaiforthat.com/" target="_blank">TAAFT</a> & <a href="https://www.nume.ai" target="_blank">Nume.ai</a></p>
+        <p style="margin-top: 15px;">Källor: <a href="https://theresanaiforthat.com/" target="_blank" style="color: var(--primary); text-decoration: none;">TAAFT</a> & <a href="https://www.nume.ai" target="_blank" style="color: var(--primary); text-decoration: none;">Nume.ai</a></p>
     </footer>
 </div>
 
