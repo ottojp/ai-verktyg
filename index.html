@@ -20,6 +20,7 @@
             --text-main: #1e293b;
             --text-muted: #64748b;
             --accent: #f1f5f9;
+            --chat-bubble: #f3f4f6;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,10 +30,8 @@
             background-color: #f8fafc;
             color: var(--text-main);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
-        /* Hero-sektion */
         header {
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
             color: white;
@@ -53,14 +52,13 @@
             border: 1px solid rgba(0, 210, 255, 0.3);
         }
 
-        h1 { font-size: 4rem; margin: 20px 0; font-weight: 800; letter-spacing: -1px; }
+        h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin: 20px 0; font-weight: 800; letter-spacing: -1px; }
         header p { font-size: 1.3rem; opacity: 0.85; max-width: 700px; margin: 0 auto; font-weight: 300; }
 
         .container { max-width: 1200px; margin: -60px auto 60px; padding: 0 25px; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; align-items: start; }
 
-        /* Förbättrade Kort med Hovringseffekt */
         .card {
             background: var(--card-bg);
             padding: 40px;
@@ -68,7 +66,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.04);
             border: 1px solid #e2e8f0;
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative;
         }
 
         .card:hover {
@@ -80,7 +77,7 @@
         h2 { color: var(--dark); margin-bottom: 20px; font-size: 1.8rem; font-weight: 800; border-bottom: 3px solid var(--accent); padding-bottom: 12px; }
         h3 { color: var(--secondary); font-size: 1.2rem; margin: 25px 0 10px; font-weight: 600; }
 
-        /* Bild-styling med Zoom-effekt */
+        /* Bild-styling med Zoom */
         .image-box {
             width: 100%;
             height: 280px;
@@ -89,7 +86,6 @@
             margin: 25px 0;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            position: relative;
         }
 
         .image-box.tall-box { height: 650px; }
@@ -101,12 +97,46 @@
             transition: transform 0.6s ease;
         }
 
-        .image-box:hover img {
-            transform: scale(1.08);
+        .image-box:hover img { transform: scale(1.08); }
+
+        /* Chatt-demo */
+        .chat-demo {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
         }
 
-        /* Teknisk Stack Pills */
-        .tech-stack { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        .chat-bubble {
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            max-width: 85%;
+        }
+
+        .user-bubble { background: var(--chat-bubble); align-self: flex-start; }
+        .ai-bubble { background: var(--primary); color: white; margin-left: auto; border-bottom-right-radius: 2px; }
+
+        /* Process-flow */
+        .flow-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .flow-step { flex: 1; position: relative; }
+        .flow-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -10px;
+            top: 10px;
+            color: var(--primary);
+        }
+        .flow-icon { font-size: 1.5rem; display: block; margin-bottom: 5px; }
+        .flow-text { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+
         .tech-pill {
             background: #f1f5f9;
             color: #475569;
@@ -114,7 +144,8 @@
             border-radius: 6px;
             font-size: 0.75rem;
             font-weight: 600;
-            border: 1px solid #e2e8f0;
+            margin-right: 5px;
+            display: inline-block;
         }
 
         .feature-list { list-style: none; margin-top: 20px; }
@@ -122,18 +153,22 @@
             padding-left: 35px;
             position: relative;
             margin-bottom: 15px;
-            font-size: 1rem;
         }
 
         .feature-list li::before {
             content: '✦';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
+            position: absolute; left: 0; color: var(--primary); font-weight: bold;
         }
 
-        /* Pris-sektion */
+        .ethics-box {
+            background: #fff9eb;
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 12px 12px 0;
+            font-size: 0.9rem;
+        }
+
         .price-section {
             background: var(--dark);
             color: white;
@@ -144,7 +179,6 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .cta-button {
@@ -155,34 +189,16 @@
             text-decoration: none;
             font-weight: 800;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
         }
 
-        .cta-button:hover { 
-            background: #fff; 
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
-        }
+        .cta-button:hover { background: #fff; transform: scale(1.05); }
 
         footer { text-align: center; padding: 80px 40px; color: var(--text-muted); font-size: 0.95rem; }
-        footer a { color: var(--primary); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: 0.3s; }
-        footer a:hover { border-bottom-color: var(--primary); }
-
-        /* Etik-ruta */
-        .ethics-box {
-            background: #fff9eb;
-            border-left: 4px solid #f59e0b;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 0 12px 12px 0;
-            font-size: 0.9rem;
-        }
+        footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
 
         @media (max-width: 850px) {
-            h1 { font-size: 2.8rem; }
             .grid { grid-template-columns: 1fr; }
             .image-box.tall-box { height: 400px; }
-            .price-section { text-align: center; justify-content: center; gap: 30px; }
         }
     </style>
 </head>
@@ -191,73 +207,87 @@
 <header>
     <span class="badge">Early Access Analys</span>
     <h1>Nume.ai</h1>
-    <p>Framtidens autonoma CFO. Finansiell intelligens optimerad för morgondagens tillväxtbolag.</p>
+    <p>Autonoma finansflöden optimerade med AI. En digital CFO för framtidens företagare.</p>
 </header>
 
 <div class="container">
     <div class="grid">
         <!-- VÄNSTER KORT -->
         <div class="card">
-            <h2>Om Verktyget</h2>
-            <div class="tech-stack">
+            <h2>Analys & Teknik</h2>
+            <div style="margin-bottom: 15px;">
                 <span class="tech-pill">LLM (GPT-4)</span>
                 <span class="tech-pill">RAG Architecture</span>
                 <span class="tech-pill">SOC-2 Security</span>
-                <span class="tech-pill">Real-time API</span>
             </div>
-            <p><strong>Nume.ai</strong> är en revolutionerande tjänst skapad av Scaleup Finance. Genom att kombinera avancerad generativ AI med finansiell expertis automatiseras de mest tidskrävande CFO-uppgifterna.</p>
+            
+            <p><strong>Nume.ai</strong> fungerar som hjärnan i företagets ekonomi. Den hämtar rådata och förvandlar den till strategiska beslutsparametrar.</p>
             
             <div class="image-box">
-                <img src="startsida.png" alt="Nume.ai Dashboard">
+                <img src="startsida.png" alt="Nume Dashboard">
             </div>
 
-            <h3>Intelligent Integration</h3>
-            <p>Nume kopplas direkt till ditt affärssystem och bankkonto. AI:n analyserar varje transaktion i realtid för att ge dig svar på frågor som "Vad är vår faktiska burn-rate denna månad?" direkt i Slack eller webbgränssnittet.</p>
-            
-            <h3>Säkerhet i fokus</h3>
-            <p>Säkerheten är grundbulten i Nume. Med <strong>Read-only access</strong> och kryptering i bankklass säkerställs att AI:n kan ge insikter utan att utgöra en risk för företagets tillgångar.</p>
+            <h3>Det digitala flödet</h3>
+            <div class="flow-container">
+                <div class="flow-step">
+                    <span class="flow-icon">🏦</span>
+                    <span class="flow-text">Bankdata</span>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-icon">⚙️</span>
+                    <span class="flow-text">AI Analys</span>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-icon">💡</span>
+                    <span class="flow-text">Insikt</span>
+                </div>
+            </div>
+
+            <h3>Teknisk Slutsats</h3>
+            <p>Genom att använda en <strong>RAG-arkitektur</strong> (Retrieval-Augmented Generation) kan Nume kombinera AI:ns förmåga att prata med företagets faktiska siffror utan att kompromissa med sanningen.</p>
 
             <div class="ethics-box">
-                <strong>Etisk AI & Precision:</strong> Till skillnad från vanliga chattbottar använder Nume "deterministisk logik" för siffror. Det innebär att AI:n aldrig gissar (hallucinerar) kring matematik, utan baserar alla svar på verifierad data.
+                <strong>AI-Precision:</strong> Nume använder "deterministisk sifferhantering". Det betyder att AI:n aldrig gissar på matematik, vilket är avgörande för finansiellt förtroende.
             </div>
+            
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Analys utförd av Otto Jedeur-Palmgren, AI1.</p>
         </div>
 
         <!-- HÖGER KORT -->
         <div class="card">
-            <h2>Syfte & Funktioner</h2>
-            <p>Syftet är att ersätta manuellt Excel-arbete med en autonom finansfunktion som agerar proaktivt istället för reaktivt.</p>
+            <h2>Funktioner i fokus</h2>
+            <p>Nume automatiserar CFO-uppgifter så att teamet kan fokusera på tillväxt istället för kalkylark.</p>
             
             <div class="image-box tall-box">
-                <img src="funktion.png" alt="Nume.ai Autopilot">
+                <img src="funktion.png" alt="Nume Autopilot">
+            </div>
+
+            <h3>Exempel på interaktion</h3>
+            <div class="chat-demo">
+                <div class="chat-bubble user-bubble">"Hur ser vår kassa ut om 3 månader?"</div>
+                <div class="chat-bubble ai-bubble">"Baserat på nuvarande burn-rate och väntade kundinbetalningar beräknas ni ha 1.2M SEK i likvida medel."</div>
             </div>
 
             <ul class="feature-list">
-                <li><strong>Autonoma rapporter:</strong> Dagliga sammanfattningar utan handpåläggning.</li>
-                <li><strong>Anomalidetektering:</strong> AI:n varnar direkt om en kostnad sticker ut.</li>
-                <li><strong>Scenario-modellering:</strong> Simulera framtiden med naturligt språk.</li>
-                <li><strong>Global räckvidd:</strong> Stöd för över 12 000 finansiella institutioner.</li>
+                <li><strong>Realtids-CFO:</strong> Alltid tillgänglig expertis.</li>
+                <li><strong>Anomalidetektering:</strong> AI:n hittar fel åt dig.</li>
+                <li><strong>Säkerhet:</strong> SOC-2 certifierad datahantering.</li>
             </ul>
-            <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-muted);">Utvecklat av CFO-experter i London och Köpenhamn för att garantera branschstandard i varje analys.</p>
         </div>
     </div>
 
-    <!-- Slutsats -->
-    <div class="card" style="margin-top: 30px;">
-        <h2>Min Analys</h2>
-        <p>Nume.ai är ett skolboksexempel på hur AI-agenter kommer att förändra kontorsarbete. Genom att nischa tekniken mot en specifik bransch (finans) löser man problemet med generella AI-modellers opålitlighet. För företag innebär detta att de kan skala upp utan att drunknat i administrativ skuld.</p>
-    </div>
-
+    <!-- Pris-sektion -->
     <div class="price-section">
         <div>
-            <h3>Nyfiken på framtiden?</h3>
-            <p>Upplev kraften i en AI-CFO med 14 dagars gratis testperiod.</p>
+            <h3>Nyfiken på Nume.ai?</h3>
+            <p>Starta din 14-dagars gratis provperiod idag.</p>
         </div>
-        <a href="https://www.nume.ai" class="cta-button" target="_blank">Utforska Nume.ai</a>
+        <a href="https://www.nume.ai" class="cta-button" target="_blank">Besök Nume.ai</a>
     </div>
 
     <footer>
-        <p>Skapad med precision av <strong>Otto Jedeur-Palmgren</strong></p>
-        <p style="margin-top: 8px;">Kurs: AI1 | 2026 | Källor: <a href="https://theresanaiforthat.com/" target="_blank">TAAFT</a> & <a href="https://www.nume.ai" target="_blank">Nume.ai</a></p>
+        <p>Projekt av <strong>Otto Jedeur-Palmgren</strong> | Kurs: AI1 | 2026</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">Källor: <a href="https://theresanaiforthat.com/" target="_blank">TAAFT</a> & <a href="https://www.nume.ai" target="_blank">Nume.ai</a></p>
     </footer>
 </div>
 
