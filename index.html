@@ -20,7 +20,6 @@
             --page-bg: #e0f0ff; 
         }
 
-        /* Mjuk skrollning */
         html { scroll-behavior: smooth; }
 
         /* Animationer */
@@ -33,6 +32,12 @@
             0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
             70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        @keyframes focusZoom {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); box-shadow: 0 0 50px rgba(0, 210, 255, 0.3); border-color: var(--primary); }
+            100% { transform: scale(1); }
         }
 
         @keyframes slideInLeft {
@@ -55,22 +60,19 @@
             overflow-x: hidden;
         }
 
-        /* FIXERAD NAVIGERING */
+        /* Navigering */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 1000;
-            background: rgba(15, 23, 42, 0.8); /* Mörk bas */
-            backdrop-filter: blur(15px); /* Glassmorphism */
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 15px 0;
             display: flex;
             justify-content: center;
             gap: 15px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
         .nav-link {
@@ -81,7 +83,7 @@
             font-size: 0.85rem;
             font-weight: 600;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
 
         .nav-link:hover {
@@ -95,18 +97,9 @@
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
             position: relative;
             color: white;
-            padding: 140px 5% 180px; 
+            padding: 160px 5% 180px; 
             text-align: center;
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
-        }
-
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            pointer-events: none;
         }
 
         .badge {
@@ -120,11 +113,11 @@
             letter-spacing: 2px;
             border: 1px solid var(--primary);
             display: inline-block;
-            animation: fadeInUp 0.8s ease;
+            margin-bottom: 15px;
         }
 
-        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin: 20px 0; font-weight: 800; letter-spacing: -2px; animation: fadeInUp 1s ease; }
-        header p { font-size: clamp(1.1rem, 2vw, 1.5rem); opacity: 0.9; max-width: 900px; margin: 0 auto; font-weight: 300; animation: fadeInUp 1.2s ease; }
+        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin: 10px 0; font-weight: 800; letter-spacing: -2px; }
+        header p { font-size: clamp(1.1rem, 2vw, 1.5rem); opacity: 0.9; max-width: 900px; margin: 0 auto; font-weight: 300; }
 
         .container { 
             width: 94%; 
@@ -151,12 +144,10 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            scroll-margin-top: 100px;
+            scroll-margin-top: 110px;
         }
 
-        .card-left { animation: slideInLeft 1s ease-out; }
-        .card-right { animation: slideInRight 1s ease-out; }
-        .card-bottom { animation: fadeInUp 1.2s ease-out; }
+        .highlight { animation: focusZoom 1s ease-in-out; }
 
         .card:hover {
             transform: translateY(-10px);
@@ -164,10 +155,7 @@
             border-color: var(--primary);
         }
 
-        .full-width { 
-            grid-column: 1 / -1; 
-            margin-top: 20px;
-        }
+        .full-width { grid-column: 1 / -1; margin-top: 20px; }
 
         .live-status {
             display: inline-flex;
@@ -176,7 +164,7 @@
             font-weight: 700;
             color: #22c55e;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .pulse-dot {
             width: 8px; height: 8px;
@@ -189,7 +177,7 @@
         h2 { color: var(--dark); margin-bottom: 25px; font-size: 2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; }
         h3 { color: var(--secondary); font-size: 1.3rem; margin: 30px 0 15px; }
 
-        /* ÅTERSTÄLLD OCH FÖRBÄTTRAD BILD-INTERAKTIVITET */
+        /* Bild-interaktivitet */
         .image-box {
             width: 100%;
             height: 400px;
@@ -198,72 +186,36 @@
             margin: 25px 0;
             overflow: hidden;
             border: 1px solid #e2e8f0;
-            position: relative; /* Viktigt för zoom */
+            position: relative;
         }
-
         .image-box.tall-box { height: 800px; }
-        
         .image-box img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Mjuk zoom */
+            width: 100%; height: 100%; object-fit: cover; 
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
         }
+        .image-box:hover img { transform: scale(1.08); }
 
-        /* Hover-effekt på bilden inuti boxen */
-        .image-box:hover img { 
-            transform: scale(1.08); /* Zoom-nivå */
-        }
-
-        /* ÅTERSTÄLLD OCH FÖRBÄTTRAD IKON-INTERAKTIVITET */
+        /* Ikon-interaktivitet */
         .flow-wrapper { 
-            display: flex; 
-            justify-content: space-around; 
-            align-items: center; 
-            margin: 35px 0; 
-            padding: 40px; 
-            background: #f8fafc; 
-            border-radius: 20px; 
-            border: 1px solid #edf2f7; 
+            display: flex; justify-content: space-around; align-items: center; 
+            margin: 35px 0; padding: 40px; background: #f8fafc; border-radius: 20px; border: 1px solid #edf2f7; 
         }
-
         .flow-item { 
-            text-align: center; 
-            font-size: 1rem; 
-            font-weight: 600; 
-            color: var(--text-muted); 
-            transition: all 0.3s ease; /* Mjuk övergång */
-            cursor: pointer; /* Visar att den är klickbar/interaktiv */
+            text-align: center; font-size: 1rem; font-weight: 600; color: var(--text-muted); 
+            transition: 0.3s; cursor: pointer; 
         }
-
-        /* Hover-effekt på flödes-sektionerna */
-        .flow-item:hover { 
-            color: var(--primary); /* Byt färg vid hover */
-            transform: translateY(-5px); /* Lyft lite */
-        }
-
-        .flow-icon { 
-            font-size: 3rem; 
-            display: block; 
-            margin-bottom: 10px; 
-            transition: transform 0.3s ease;
-        }
-
-        /* Hover-effekt specifikt på ikonen */
-        .flow-item:hover .flow-icon {
-            transform: scale(1.15); /* Gör ikonen lite större */
-        }
-
+        .flow-item:hover { color: var(--primary); transform: translateY(-5px); }
+        .flow-icon { font-size: 3rem; display: block; margin-bottom: 10px; transition: 0.3s; }
+        .flow-item:hover .flow-icon { transform: scale(1.15); }
         .flow-arrow { font-size: 2rem; color: var(--primary); font-weight: bold; opacity: 0.6; }
 
+        /* Chatt */
         .chat-container { border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; background: white; width: 100%; max-width: 700px; margin: 20px auto; display: flex; flex-direction: column; }
-        .bubble { padding: 16px 22px; border-radius: 22px; margin-bottom: 15px; font-size: 1.05rem; max-width: 85%; }
-        
+        .bubble { padding: 16px 22px; border-radius: 22px; margin-bottom: 15px; font-size: 1.05rem; max-width: 85%; line-height: 1.4; }
         .ai-response { background: #f1f5f9; color: var(--text-main); border-bottom-left-radius: 4px; align-self: flex-start; }
         .user-question { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-bottom-right-radius: 4px; align-self: flex-end; }
 
         .tech-pill { background: #f1f5f9; color: #475569; padding: 8px 16px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; margin-right: 10px; display: inline-block; border: 1px solid #e2e8f0; }
-
         .feature-list li { padding-left: 40px; position: relative; margin-bottom: 22px; font-size: 1.1rem; list-style: none;}
         .feature-list li::before { content: '✦'; position: absolute; left: 0; color: var(--primary); font-weight: bold; font-size: 1.3rem; }
 
@@ -278,15 +230,10 @@
         footer { text-align: center; padding: 120px 40px; color: var(--text-muted); font-size: 1.1rem; }
 
         @media (max-width: 1024px) {
-            nav { gap: 8px; padding: 10px 0; }
-            .nav-link { padding: 6px 12px; font-size: 0.75rem; }
             .grid { grid-template-columns: 1fr; }
             .container { width: 92%; margin-top: -80px; }
             .flow-wrapper { flex-direction: column; gap: 25px; }
-            .flow-arrow { transform: rotate(90deg); }
-            .image-box.tall-box { height: 500px; }
-            .price-section { flex-direction: column; text-align: center; gap: 40px; padding: 50px; }
-            header { padding: 120px 20px 140px; }
+            header { padding: 140px 20px 140px; }
         }
     </style>
 </head>
@@ -320,29 +267,31 @@
             <p>Verktyget agerar som ett "intelligent lager" ovanpå din befintliga bank och bokföring. Istället för att logga in i flera olika system, samlar Nume in all data och presenterar den i ett enkelt format direkt via webben eller Slack.</p>
             
             <h3>Sömlösa Integrationer</h3>
-            <p>För att uppnå symmetri och full funktionalitet kopplar Nume.ai ihop sig med marknadsledande system som <strong>Fortnox, QuickBooks, och Stripe</strong>. Genom säkra API-anslutningar flödar transaktionsdata oavbrutet, vilket eliminerar behovet av manuell export.</p>
+            <p>För att uppnå full funktionalitet kopplar Nume.ai ihop sig med marknadsledande system som <strong>Fortnox, QuickBooks, och Stripe</strong>. Genom säkra API-anslutningar flödar transaktionsdata oavbrutet, vilket eliminerar behovet av manuell export.</p>
             
             <h3>Tekniken bakom</h3>
-            <p>Genom att använda stora språkmodeller (LLMs) som är specialtränade på finansiell terminologi, kan Nume förstå komplexa samband mellan intäkter och utgifter.</p>
+            <p>Genom att använda stora språkmodeller (LLMs) som är specialtränade på finansiell terminologi, kan Nume förstå komplexa samband mellan intäkter och utgifter på ett sätt som traditionella kalkylblad aldrig kan.</p>
 
             <h3>Säkerhet & Integritet</h3>
-            <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. AI:n har endast läsrättigheter – den kan altså aldrig flytta pengar utan din tillåtelse.</p>
+            <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. AI:n har endast läsrättigheter – den kan alltså aldrig flytta pengar eller genomföra transaktioner utan din tillåtelse.</p>
         </div>
 
         <div class="card card-right" id="syfte">
             <h2>Syfte & Funktioner</h2>
-            <p>Huvudsyftet med Nume är att sätta företagets finansiella hälsa på "autopilot", vilket sparar tid för både VD och ekonomiteam.</p>
+            <p>Huvudsyftet med Nume är att sätta företagets finansiella hälsa på "autopilot", vilket sparar hundratals timmar för både VD och ekonomiteam varje år.</p>
             
             <div class="image-box tall-box">
                 <img src="funktion.png" alt="Nume.ai Autopilot">
             </div>
 
             <ul class="feature-list">
-                <li><strong>Dagliga kassarapporter:</strong> Ha alltid koll på likviditeten.</li>
-                <li><strong>Veckovisa uppdateringar:</strong> See hur ni ligger till mot budget.</li>
-                <li><strong>Månadsbokslut:</strong> Automatiserade sammanfattningar.</li>
-                <li><strong>Scenario-planering:</strong> Fråga AI:n om framtiden.</li>
+                <li><strong>Dagliga kassarapporter:</strong> Ha alltid koll på likviditeten utan manuellt arbete.</li>
+                <li><strong>Veckovisa uppdateringar:</strong> Se hur ni ligger till mot budget och prognos.</li>
+                <li><strong>Månadsbokslut:</strong> Automatiserade sammanfattningar som förklarar avvikelser.</li>
+                <li><strong>Scenario-planering:</strong> Fråga AI:n om framtiden baserat på historisk data.</li>
             </ul>
+            
+            <p style="margin-top: 20px;">Genom att automatisera datainsamlingen kan teamet fokusera på strategiska beslut istället för att jaga kvitton och matcha transaktioner manuellt.</p>
         </div>
 
         <div class="card full-width card-bottom" id="interaktion">
@@ -360,14 +309,14 @@
                     </div>
                     
                     <div style="background: #fff9eb; padding: 30px; border-left: 5px solid #f59e0b; border-radius: 15px; font-size: 1.1rem; color: #92400e;">
-                        <strong>Etisk notering:</strong> För att undvika hallucinationer använder Nume deterministisk logik för beräkningar kombinerat med LLM för tolkning.
+                        <strong>Etisk notering:</strong> För att undvika hallucinationer använder Nume deterministisk logik för beräkningar kombinerat med LLM för tolkning och kommunikation.
                     </div>
                 </div>
 
                 <div>
                     <div class="chat-container">
-                        <div class="bubble user-question">"Hur ser vår kassa ut om 3 månader?"</div>
-                        <div class="bubble ai-response">"Baserat på nuvarande burn-rate beräknas ni ha 1.2M SEK i likvida medel."</div>
+                        <div class="bubble user-question">"Hur ser vår kassa ut om 3 månader om vi anställer två säljare till i juni?"</div>
+                        <div class="bubble ai-response">"Baserat på er nuvarande burn-rate och den estimerade lönekostnaden beräknas ni ha 1.2M SEK i likvida medel vid slutet av augusti."</div>
                     </div>
                     <div style="text-align: center; margin-top: 20px;">
                         <span class="tech-pill">GPT-4o</span>
@@ -381,7 +330,7 @@
 
     <div class="card card-bottom" style="margin-top: 35px;" id="analys">
         <h2>Min Analys</h2>
-        <p>Nume.ai representerar den nya vågen av "Agentic AI". Det är inte bara en databas, utan en aktiv partner. För företag innebär detta att de kan skala utan att drabbas av administrativ skuld. Det är ett perfekt exempel på hur nischad AI skapar verkligt affärsvärde.</p>
+        <p>Nume.ai representerar den nya vågen av "Agentic AI". Det är inte bara en passiv databas, utan en aktiv partner som proaktivt flaggar för avvikelser. För företag innebär detta att de kan skala snabbare utan att drabbas av administrativ skuld. Det är ett perfekt exempel på hur nischad AI, som fokuserar på en specifik vertikal (finans), skapar betydligt mer värde än generella verktyg.</p>
     </div>
 
     <div class="price-section card-bottom">
@@ -397,6 +346,25 @@
         <p style="margin-top: 20px;">Källor: <a href="https://theresanaiforthat.com/" target="_blank" style="color: var(--secondary); text-decoration: none;">TAAFT</a> & <a href="https://www.nume.ai" target="_blank" style="color: var(--secondary); text-decoration: none;">Nume.ai</a></p>
     </footer>
 </div>
+
+<script>
+    document.querySelectorAll('.nav-link').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                document.querySelectorAll('.card').forEach(c => c.classList.remove('highlight'));
+                setTimeout(() => {
+                    targetElement.classList.add('highlight');
+                }, 400);
+                setTimeout(() => {
+                    targetElement.classList.remove('highlight');
+                }, 1400);
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
