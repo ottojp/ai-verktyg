@@ -54,7 +54,7 @@
             overflow-x: hidden;
         }
 
-        /* FIXERAD NAVIGERING */
+        /* NAVIGERING */
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -79,6 +79,7 @@
             font-weight: 600;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: 0.3s;
+            white-space: nowrap;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -95,15 +96,6 @@
             padding: 160px 5% 180px; 
             text-align: center;
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
-        }
-
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            pointer-events: none;
         }
 
         .badge {
@@ -152,17 +144,12 @@
             scroll-margin-top: 110px;
         }
 
-        /* PERMANENT HIGHLIGHT */
         .highlight { 
             transform: scale(1.03); 
             box-shadow: 0 0 60px rgba(0, 210, 255, 0.3); 
             border-color: var(--primary);
             z-index: 50;
         }
-
-        .card-left { animation: slideInLeft 1s ease-out; }
-        .card-right { animation: slideInRight 1s ease-out; }
-        .card-bottom { animation: fadeInUp 1.2s ease-out; }
 
         .card:hover {
             transform: translateY(-10px);
@@ -240,11 +227,26 @@
 
         footer { text-align: center; padding: 120px 40px; color: var(--text-muted); font-size: 1.1rem; }
 
+        /* MOBILANPASSNING (Ändrar inget på dator) */
         @media (max-width: 1024px) {
-            .grid { grid-template-columns: 1fr; }
-            .container { width: 92%; margin-top: -80px; }
-            .flow-wrapper { flex-direction: column; gap: 25px; }
-            header { padding: 140px 20px 140px; }
+            nav { 
+                justify-content: flex-start; 
+                overflow-x: auto; 
+                padding: 10px 15px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .nav-link { padding: 6px 15px; font-size: 0.8rem; }
+            .grid { grid-template-columns: 1fr; gap: 20px; }
+            .container { width: 96%; margin-top: -60px; padding: 0 10px; }
+            .card { padding: 25px; }
+            .image-box { height: 300px; }
+            .image-box.tall-box { height: 400px; }
+            .flow-wrapper { flex-direction: column; gap: 20px; padding: 20px; }
+            .flow-arrow { transform: rotate(90deg); }
+            header { padding: 120px 5% 140px; }
+            h1 { font-size: 2.5rem; }
+            .price-section { flex-direction: column; text-align: center; padding: 40px 20px; gap: 30px; }
+            .highlight { transform: scale(1.01); } /* Mindre zoom på mobil för att undvika overflow */
         }
     </style>
 </head>
@@ -365,14 +367,10 @@
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
-                // Ta bort highlight och aktiv status från alla andra
                 document.querySelectorAll('.card').forEach(c => c.classList.remove('highlight'));
                 document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
-                
-                // Markera klickad länk
                 this.classList.add('active');
 
-                // Aktivera permanent zoom på mål-bubblan
                 setTimeout(() => {
                     targetElement.classList.add('highlight');
                 }, 300);
