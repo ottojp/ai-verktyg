@@ -95,7 +95,7 @@
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
             position: relative;
             color: white;
-            padding: 140px 5% 180px; /* Mer padding i topp för att inte täckas av nav */
+            padding: 140px 5% 180px; 
             text-align: center;
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
         }
@@ -151,7 +151,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            scroll-margin-top: 100px; /* Viktigt! Gör att sektionen inte hamnar bakom den fixerade menyn */
+            scroll-margin-top: 100px;
         }
 
         .card-left { animation: slideInLeft 1s ease-out; }
@@ -189,6 +189,7 @@
         h2 { color: var(--dark); margin-bottom: 25px; font-size: 2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; }
         h3 { color: var(--secondary); font-size: 1.3rem; margin: 30px 0 15px; }
 
+        /* ÅTERSTÄLLD OCH FÖRBÄTTRAD BILD-INTERAKTIVITET */
         .image-box {
             width: 100%;
             height: 400px;
@@ -197,14 +198,62 @@
             margin: 25px 0;
             overflow: hidden;
             border: 1px solid #e2e8f0;
+            position: relative; /* Viktigt för zoom */
         }
 
         .image-box.tall-box { height: 800px; }
-        .image-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
+        
+        .image-box img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Mjuk zoom */
+        }
 
-        .flow-wrapper { display: flex; justify-content: space-around; align-items: center; margin: 35px 0; padding: 40px; background: #f8fafc; border-radius: 20px; border: 1px solid #edf2f7; }
-        .flow-item { text-align: center; font-size: 1rem; font-weight: 600; color: var(--text-muted); }
-        .flow-icon { font-size: 3rem; display: block; margin-bottom: 10px; }
+        /* Hover-effekt på bilden inuti boxen */
+        .image-box:hover img { 
+            transform: scale(1.08); /* Zoom-nivå */
+        }
+
+        /* ÅTERSTÄLLD OCH FÖRBÄTTRAD IKON-INTERAKTIVITET */
+        .flow-wrapper { 
+            display: flex; 
+            justify-content: space-around; 
+            align-items: center; 
+            margin: 35px 0; 
+            padding: 40px; 
+            background: #f8fafc; 
+            border-radius: 20px; 
+            border: 1px solid #edf2f7; 
+        }
+
+        .flow-item { 
+            text-align: center; 
+            font-size: 1rem; 
+            font-weight: 600; 
+            color: var(--text-muted); 
+            transition: all 0.3s ease; /* Mjuk övergång */
+            cursor: pointer; /* Visar att den är klickbar/interaktiv */
+        }
+
+        /* Hover-effekt på flödes-sektionerna */
+        .flow-item:hover { 
+            color: var(--primary); /* Byt färg vid hover */
+            transform: translateY(-5px); /* Lyft lite */
+        }
+
+        .flow-icon { 
+            font-size: 3rem; 
+            display: block; 
+            margin-bottom: 10px; 
+            transition: transform 0.3s ease;
+        }
+
+        /* Hover-effekt specifikt på ikonen */
+        .flow-item:hover .flow-icon {
+            transform: scale(1.15); /* Gör ikonen lite större */
+        }
+
         .flow-arrow { font-size: 2rem; color: var(--primary); font-weight: bold; opacity: 0.6; }
 
         .chat-container { border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; background: white; width: 100%; max-width: 700px; margin: 20px auto; display: flex; flex-direction: column; }
@@ -277,7 +326,7 @@
             <p>Genom att använda stora språkmodeller (LLMs) som är specialtränade på finansiell terminologi, kan Nume förstå komplexa samband mellan intäkter och utgifter.</p>
 
             <h3>Säkerhet & Integritet</h3>
-            <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. AI:n har endast läsrättigheter – den kan alltså aldrig flytta pengar utan din tillåtelse.</p>
+            <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. AI:n har endast läsrättigheter – den kan altså aldrig flytta pengar utan din tillåtelse.</p>
         </div>
 
         <div class="card card-right" id="syfte">
