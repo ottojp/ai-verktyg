@@ -55,11 +55,47 @@
             overflow-x: hidden;
         }
 
+        /* FIXERAD NAVIGERING */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.8); /* Mörk bas */
+            backdrop-filter: blur(15px); /* Glassmorphism */
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--primary);
+            color: var(--dark);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
         header {
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
             position: relative;
             color: white;
-            padding: 80px 5% 200px; 
+            padding: 140px 5% 180px; /* Mer padding i topp för att inte täckas av nav */
             text-align: center;
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
         }
@@ -71,36 +107,6 @@
             background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
             background-size: 30px 30px;
             pointer-events: none;
-        }
-
-        /* Navigationsmeny */
-        .nav-container {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            animation: fadeInUp 1.4s ease;
-        }
-
-        .nav-link {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-link:hover {
-            background: var(--primary);
-            color: var(--dark);
-            border-color: var(--primary);
-            transform: translateY(-3px);
         }
 
         .badge {
@@ -123,7 +129,7 @@
         .container { 
             width: 94%; 
             max-width: 1800px; 
-            margin: -130px auto 50px; 
+            margin: -100px auto 50px; 
             padding: 0 20px; 
             position: relative;
             z-index: 10;
@@ -145,7 +151,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            scroll-margin-top: 40px; /* Ger lite luft ovanför kortet när man hoppar till det */
+            scroll-margin-top: 100px; /* Viktigt! Gör att sektionen inte hamnar bakom den fixerade menyn */
         }
 
         .card-left { animation: slideInLeft 1s ease-out; }
@@ -223,30 +229,31 @@
         footer { text-align: center; padding: 120px 40px; color: var(--text-muted); font-size: 1.1rem; }
 
         @media (max-width: 1024px) {
+            nav { gap: 8px; padding: 10px 0; }
+            .nav-link { padding: 6px 12px; font-size: 0.75rem; }
             .grid { grid-template-columns: 1fr; }
-            .container { width: 92%; margin-top: -100px; }
+            .container { width: 92%; margin-top: -80px; }
             .flow-wrapper { flex-direction: column; gap: 25px; }
             .flow-arrow { transform: rotate(90deg); }
             .image-box.tall-box { height: 500px; }
             .price-section { flex-direction: column; text-align: center; gap: 40px; padding: 50px; }
-            header { padding: 60px 20px 140px; }
-            .nav-container { margin-top: 25px; }
+            header { padding: 120px 20px 140px; }
         }
     </style>
 </head>
 <body>
 
+<nav>
+    <a href="#om-oss" class="nav-link">Om oss</a>
+    <a href="#syfte" class="nav-link">Syfte & Funktion</a>
+    <a href="#interaktion" class="nav-link">AI-Interaktion</a>
+    <a href="#analys" class="nav-link">Min Analys</a>
+</nav>
+
 <header>
     <span class="badge">Early Access Analys</span>
     <h1>Nume.ai</h1>
     <p>The Operating System for Finance Teams</p>
-    
-    <div class="nav-container">
-        <a href="#om-oss" class="nav-link">Om oss</a>
-        <a href="#syfte" class="nav-link">Syfte & Funktion</a>
-        <a href="#interaktion" class="nav-link">AI-Interaktion</a>
-        <a href="#analys" class="nav-link">Min Analys</a>
-    </div>
 </header>
 
 <div class="container">
@@ -270,7 +277,7 @@
             <p>Genom att använda stora språkmodeller (LLMs) som är specialtränade på finansiell terminologi, kan Nume förstå komplexa samband mellan intäkter och utgifter.</p>
 
             <h3>Säkerhet & Integritet</h3>
-            <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. AI:n har endast läsrättigheter – den kan altså aldrig flytta pengar utan din tillåtelse.</p>
+            <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. AI:n har endast läsrättigheter – den kan alltså aldrig flytta pengar utan din tillåtelse.</p>
         </div>
 
         <div class="card card-right" id="syfte">
