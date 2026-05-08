@@ -1,15 +1,3 @@
-För att få sidan att se riktigt proffsig ut i mobilen behöver vi jobba med **typografi**, **mellanrum (padding)** och hur elementen **staplas**. Just nu kan rubriken bli för stor och bilderna för höga på en liten skärm.
-
-Här är förbättringarna jag har lagt till i koden för mobilversionen:
-
-1. **Responsiv Text:** Rubriken (`h1`) skalas nu ner automatiskt på mindre skärmar så att den inte tar upp hela displayen.
-2. **Anpassade Bildhöjder:** Den höga bilden (`tall-box`) kortas ner i mobilen så att användaren slipper skrolla i evigheter för att se nästa sektion.
-3. **Kompakt Flöde:** Pilarna mellan Bankdata, AI-Analys och Insikt roteras automatiskt till att peka **nedåt** i mobilen, vilket skapar ett logiskt vertikalt flöde.
-4. **Luftigare Layout:** Jag har justerat padding inuti korten så att innehållet får plats utan att se trångt ut på smala skärmar.
-
-Här är den optimerade koden:
-
-```html
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -30,7 +18,6 @@ Här är den optimerade koden:
             --text-main: #1e293b;
             --text-muted: #64748b;
             --page-bg: #e0f0ff; 
-            --accent: #f1f5f9;
         }
 
         /* Animationer */
@@ -69,9 +56,9 @@ Här är den optimerade koden:
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
             position: relative;
             color: white;
-            padding: 80px 20px 140px; 
+            padding: 100px 20px 180px; 
             text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
         }
 
         header::before {
@@ -88,7 +75,7 @@ Här är den optimerade koden:
             color: var(--primary);
             padding: 6px 15px;
             border-radius: 20px;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -97,41 +84,28 @@ Här är den optimerade koden:
             animation: fadeInUp 0.8s ease;
         }
 
-        h1 { 
-            font-size: clamp(2.5rem, 8vw, 4.5rem); 
-            margin: 15px 0; 
-            font-weight: 800; 
-            letter-spacing: -2px; 
-            animation: fadeInUp 1s ease; 
-        }
-
-        header p { 
-            font-size: clamp(1.1rem, 3vw, 1.5rem); 
-            opacity: 0.9; 
-            max-width: 800px; 
-            margin: 0 auto; 
-            font-weight: 300; 
-            animation: fadeInUp 1.2s ease; 
-        }
+        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin: 20px 0; font-weight: 800; letter-spacing: -2px; animation: fadeInUp 1s ease; }
+        header p { font-size: clamp(1.1rem, 2vw, 1.5rem); opacity: 0.9; max-width: 800px; margin: 0 auto; font-weight: 300; animation: fadeInUp 1.2s ease; }
 
         .container { 
             max-width: 1300px; 
-            margin: -80px auto 50px; 
-            padding: 0 20px; 
+            margin: -130px auto 50px; 
+            padding: 0 30px; 
             position: relative;
             z-index: 10;
         }
 
+        /* GRID FIX: Tvingar två kolumner på dator, en på mobil */
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 20px; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 30px; 
             align-items: start; 
         }
 
         .card {
             background: var(--card-bg);
-            padding: clamp(20px, 5vw, 40px); 
+            padding: 40px; 
             border-radius: 24px;
             box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
             border: 1px solid rgba(226, 232, 240, 0.8);
@@ -156,7 +130,7 @@ Här är den optimerade koden:
         .live-status {
             display: inline-flex;
             align-items: center;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: #22c55e;
             text-transform: uppercase;
@@ -170,76 +144,57 @@ Här är den optimerade koden:
             animation: pulse 2s infinite;
         }
 
-        h2 { color: var(--dark); margin-bottom: 20px; font-size: clamp(1.4rem, 4vw, 1.8rem); border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-        h3 { color: var(--secondary); font-size: 1.1rem; margin: 25px 0 15px; }
+        h2 { color: var(--dark); margin-bottom: 20px; font-size: 1.8rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+        h3 { color: var(--secondary); font-size: 1.2rem; margin: 25px 0 15px; }
 
         .image-box {
             width: 100%;
-            height: 250px;
+            height: 300px;
             background: #f1f5f9;
             border-radius: 16px;
-            margin: 20px 0;
+            margin: 25px 0;
             overflow: hidden;
             border: 1px solid #e2e8f0;
         }
 
-        .image-box.tall-box { height: clamp(300px, 60vh, 700px); }
+        .image-box.tall-box { height: 700px; }
         .image-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
+        .image-box:hover img { transform: scale(1.08); }
 
-        .flow-wrapper { 
-            display: flex; 
-            justify-content: space-around; 
-            align-items: center; 
-            margin: 20px 0; 
-            padding: 20px; 
-            background: #f8fafc; 
-            border-radius: 16px; 
-            border: 1px solid #edf2f7; 
-        }
-        .flow-item { text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
-        .flow-icon { font-size: 2rem; display: block; margin-bottom: 5px; }
-        .flow-arrow { font-size: 1.2rem; color: var(--primary); font-weight: bold; opacity: 0.6; }
+        .flow-wrapper { display: flex; justify-content: space-around; align-items: center; margin: 30px 0; padding: 30px; background: #f8fafc; border-radius: 16px; border: 1px solid #edf2f7; }
+        .flow-item { text-align: center; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); }
+        .flow-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+        .flow-arrow { font-size: 1.5rem; color: var(--primary); font-weight: bold; opacity: 0.6; }
 
-        .chat-container { border: 1px solid #e2e8f0; border-radius: 16px; padding: 15px; background: white; width: 100%; max-width: 600px; margin: 20px auto; }
-        .bubble { padding: 12px 16px; border-radius: 18px; margin-bottom: 10px; font-size: 0.95rem; max-width: 90%; }
+        .chat-container { border: 1px solid #e2e8f0; border-radius: 16px; padding: 25px; background: white; width: 100%; max-width: 600px; margin: 20px auto; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .bubble { padding: 14px 20px; border-radius: 20px; margin-bottom: 12px; font-size: 1rem; max-width: 85%; transition: 0.3s; }
         .user { background: #f1f5f9; color: var(--text-main); border-bottom-left-radius: 4px; }
         .ai { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; margin-left: auto; border-bottom-right-radius: 4px; }
 
-        .tech-pill { background: #f1f5f9; color: #475569; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; margin: 4px; display: inline-block; border: 1px solid #e2e8f0; }
+        .tech-pill { background: #f1f5f9; color: #475569; padding: 6px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; margin-right: 8px; display: inline-block; border: 1px solid #e2e8f0; }
 
-        .feature-list { list-style: none; }
-        .feature-list li { padding-left: 30px; position: relative; margin-bottom: 15px; font-size: 1rem; }
-        .feature-list li::before { content: '✦'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+        .feature-list li { padding-left: 35px; position: relative; margin-bottom: 18px; font-size: 1.05rem; list-style: none;}
+        .feature-list li::before { content: '✦'; position: absolute; left: 0; color: var(--primary); font-weight: bold; font-size: 1.2rem; }
 
         .price-section { 
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
-            color: white; padding: 40px 20px; border-radius: 24px; margin-top: 30px; 
-            display: flex; justify-content: space-between; align-items: center; flex-direction: column;
-            text-align: center; gap: 25px;
+            color: white; padding: 60px; border-radius: 24px; margin-top: 40px; 
+            display: flex; justify-content: space-between; align-items: center;
         }
 
-        .cta-button { background: var(--primary); color: var(--dark); padding: 16px 32px; border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 1rem; }
+        .cta-button { background: var(--primary); color: var(--dark); padding: 18px 40px; border-radius: 12px; text-decoration: none; font-weight: 800; transition: 0.3s; font-size: 1.1rem; }
 
-        footer { text-align: center; padding: 60px 20px; color: var(--text-muted); font-size: 0.9rem; }
+        footer { text-align: center; padding: 100px 40px; color: var(--text-muted); font-size: 1rem; }
 
-        /* MOBIL-ANPASSNINGAR */
-        @media (max-width: 768px) {
-            header { padding: 60px 20px 120px; }
-            .container { margin-top: -60px; }
+        /* MOBIL-SPECIFIK KOD - Ändrar layout bara när skärmen är liten */
+        @media (max-width: 950px) {
             .grid { grid-template-columns: 1fr; }
-            
-            .flow-wrapper { flex-direction: column; gap: 15px; }
+            .container { margin-top: -100px; padding: 0 20px; }
+            .flow-wrapper { flex-direction: column; gap: 20px; }
             .flow-arrow { transform: rotate(90deg); }
-            
-            .price-section { flex-direction: column; }
-            
-            .card-left, .card-right { animation: fadeInUp 1s ease; }
-            
-            .image-box.tall-box { height: 350px; }
-        }
-
-        @media (min-width: 769px) {
-            .price-section { flex-direction: row; text-align: left; padding: 60px; }
+            .image-box.tall-box { height: 400px; }
+            .price-section { flex-direction: column; text-align: center; gap: 30px; }
+            header { padding: 80px 20px 140px; }
         }
     </style>
 </head>
@@ -289,7 +244,7 @@ Här är den optimerade koden:
         </div>
 
         <div class="card full-width card-bottom">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; align-items: center;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: center;">
                 <div>
                     <h2>AI-Interaktion & Flöde</h2>
                     <p>Här ser vi hur Nume.ai bryter ner dataflödet och hur användaren interagerar med tekniken genom naturligt språk.</p>
@@ -302,7 +257,7 @@ Här är den optimerade koden:
                         <div class="flow-item"><span class="flow-icon">📊</span>INSIKT</div>
                     </div>
                     
-                    <div style="background: #fff9eb; padding: 20px; border-left: 5px solid #f59e0b; border-radius: 12px; font-size: 0.95rem; color: #92400e;">
+                    <div style="background: #fff9eb; padding: 25px; border-left: 5px solid #f59e0b; border-radius: 12px; font-size: 1rem; color: #92400e;">
                         <strong>Etisk notering:</strong> För att undvika hallucinationer använder Nume deterministisk logik för beräkningar kombinerat med LLM för tolkning.
                     </div>
                 </div>
@@ -312,7 +267,7 @@ Här är den optimerade koden:
                         <div class="bubble user">"Hur ser vår kassa ut om 3 månader?"</div>
                         <div class="bubble ai">"Baserat på nuvarande burn-rate beräknas ni ha 1.2M SEK i likvida medel."</div>
                     </div>
-                    <div style="text-align: center; margin-top: 10px;">
+                    <div style="text-align: center; margin-top: 15px;">
                         <span class="tech-pill">GPT-4o</span>
                         <span class="tech-pill">RAG Engine</span>
                         <span class="tech-pill">Financial LLM</span>
@@ -322,14 +277,14 @@ Här är den optimerade koden:
         </div>
     </div>
 
-    <div class="card card-bottom" style="margin-top: 20px;">
+    <div class="card card-bottom" style="margin-top: 30px;">
         <h2>Min Analys</h2>
         <p>Nume.ai representerar den nya vågen av "Agentic AI". Det är inte bara en databas, utan en aktiv partner. För företag innebär detta att de kan skala utan att drabbas av administrativ skuld. Det är ett perfekt exempel på hur nischad AI skapar verkligt affärsvärde.</p>
     </div>
 
     <div class="price-section card-bottom">
         <div>
-            <h3 style="color: var(--primary); margin: 0 0 5px 0;">Redo att börja?</h3>
+            <h3 style="color: var(--primary); margin: 0 0 10px 0;">Redo att börja?</h3>
             <p>Testa Nume.ai gratis i 14 dagar.</p>
         </div>
         <a href="https://www.nume.ai" class="cta-button" target="_blank">Besök Nume.ai</a>
@@ -337,11 +292,9 @@ Här är den optimerade koden:
 
     <footer>
         <p>Skapad av <strong>Otto Jedeur-Palmgren</strong> | Kurs: AI1 | 2026</p>
-        <p style="margin-top: 10px;">Källor: <a href="https://theresanaiforthat.com/" target="_blank" style="color: var(--primary); text-decoration: none;">TAAFT</a> & <a href="https://www.nume.ai" target="_blank" style="color: var(--primary); text-decoration: none;">Nume.ai</a></p>
+        <p style="margin-top: 15px;">Källor: <a href="https://theresanaiforthat.com/" target="_blank" style="color: var(--primary); text-decoration: none;">TAAFT</a> & <a href="https://www.nume.ai" target="_blank" style="color: var(--primary); text-decoration: none;">Nume.ai</a></p>
     </footer>
 </div>
 
 </body>
 </html>
-
-```
