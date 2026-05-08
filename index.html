@@ -88,8 +88,8 @@
         header p { font-size: clamp(1.1rem, 2vw, 1.5rem); opacity: 0.9; max-width: 900px; margin: 0 auto; font-weight: 300; animation: fadeInUp 1.2s ease; }
 
         .container { 
-            width: 94%; /* Gör att sidan fyller ut skärmen oavsett storlek */
-            max-width: 1800px; /* Sätter en mycket generös gräns för de absolut största skärmarna */
+            width: 94%; 
+            max-width: 1800px; 
             margin: -130px auto 50px; 
             padding: 0 20px; 
             position: relative;
@@ -99,8 +99,8 @@
         .grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
-            gap: 40px; /* Mer luft mellan korten på stora skärmar */
-            align-items: start; 
+            gap: 40px; 
+            align-items: stretch; /* Gör att korten i samma rad blir lika långa */
         }
 
         .card {
@@ -110,6 +110,8 @@
             box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
             border: 1px solid rgba(226, 232, 240, 0.8);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
         }
 
         .card-left { animation: slideInLeft 1s ease-out; }
@@ -166,10 +168,12 @@
         .flow-icon { font-size: 3rem; display: block; margin-bottom: 10px; }
         .flow-arrow { font-size: 2rem; color: var(--primary); font-weight: bold; opacity: 0.6; }
 
-        .chat-container { border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; background: white; width: 100%; max-width: 700px; margin: 20px auto; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .chat-container { border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; background: white; width: 100%; max-width: 700px; margin: 20px auto; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: column; }
         .bubble { padding: 16px 22px; border-radius: 22px; margin-bottom: 15px; font-size: 1.05rem; max-width: 85%; }
-        .user { background: #f1f5f9; color: var(--text-main); border-bottom-left-radius: 4px; }
-        .ai { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; margin-left: auto; border-bottom-right-radius: 4px; }
+        
+        /* Uppdaterad chattspegling */
+        .ai-response { background: #f1f5f9; color: var(--text-main); border-bottom-left-radius: 4px; align-self: flex-start; }
+        .user-question { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-bottom-right-radius: 4px; align-self: flex-end; }
 
         .tech-pill { background: #f1f5f9; color: #475569; padding: 8px 16px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; margin-right: 10px; display: inline-block; border: 1px solid #e2e8f0; }
 
@@ -186,7 +190,6 @@
 
         footer { text-align: center; padding: 120px 40px; color: var(--text-muted); font-size: 1.1rem; }
 
-        /* MOBIL OCH SMÅ SKÄRMAR */
         @media (max-width: 1024px) {
             .grid { grid-template-columns: 1fr; }
             .container { width: 92%; margin-top: -100px; }
@@ -219,6 +222,9 @@
 
             <h3>Hur det fungerar</h3>
             <p>Verktyget agerar som ett "intelligent lager" ovanpå din befintliga bank och bokföring. Istället för att logga in i flera olika system, samlar Nume in all data och presenterar den i ett enkelt format direkt via webben eller Slack.</p>
+            
+            <h3>Sömlösa Integrationer</h3>
+            <p>För att uppnå symmetri och full funktionalitet kopplar Nume.ai ihop sig med marknadsledande system som <strong>Fortnox, QuickBooks, och Stripe</strong>. Genom säkra API-anslutningar flödar transaktionsdata oavbrutet, vilket eliminerar behovet av manuell export.</p>
             
             <h3>Tekniken bakom</h3>
             <p>Genom att använda stora språkmodeller (LLMs) som är specialtränade på finansiell terminologi, kan Nume förstå komplexa samband mellan intäkter och utgifter.</p>
@@ -264,8 +270,8 @@
 
                 <div>
                     <div class="chat-container">
-                        <div class="bubble user">"Hur ser vår kassa ut om 3 månader?"</div>
-                        <div class="bubble ai">"Baserat på nuvarande burn-rate beräknas ni ha 1.2M SEK i likvida medel."</div>
+                        <div class="bubble user-question">"Hur ser vår kassa ut om 3 månader?"</div>
+                        <div class="bubble ai-response">"Baserat på nuvarande burn-rate beräknas ni ha 1.2M SEK i likvida medel."</div>
                     </div>
                     <div style="text-align: center; margin-top: 20px;">
                         <span class="tech-pill">GPT-4o</span>
