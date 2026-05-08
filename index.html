@@ -20,6 +20,9 @@
             --page-bg: #e0f0ff; 
         }
 
+        /* Mjuk skrollning */
+        html { scroll-behavior: smooth; }
+
         /* Animationer */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -56,7 +59,7 @@
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
             position: relative;
             color: white;
-            padding: 100px 5% 180px; 
+            padding: 80px 5% 200px; 
             text-align: center;
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
         }
@@ -68,6 +71,36 @@
             background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
             background-size: 30px 30px;
             pointer-events: none;
+        }
+
+        /* Navigationsmeny */
+        .nav-container {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .nav-link {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-link:hover {
+            background: var(--primary);
+            color: var(--dark);
+            border-color: var(--primary);
+            transform: translateY(-3px);
         }
 
         .badge {
@@ -100,7 +133,7 @@
             display: grid; 
             grid-template-columns: 1fr 1fr; 
             gap: 40px; 
-            align-items: stretch; /* Gör att korten i samma rad blir lika långa */
+            align-items: stretch; 
         }
 
         .card {
@@ -112,6 +145,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
+            scroll-margin-top: 40px; /* Ger lite luft ovanför kortet när man hoppar till det */
         }
 
         .card-left { animation: slideInLeft 1s ease-out; }
@@ -161,17 +195,15 @@
 
         .image-box.tall-box { height: 800px; }
         .image-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
-        .image-box:hover img { transform: scale(1.08); }
 
         .flow-wrapper { display: flex; justify-content: space-around; align-items: center; margin: 35px 0; padding: 40px; background: #f8fafc; border-radius: 20px; border: 1px solid #edf2f7; }
         .flow-item { text-align: center; font-size: 1rem; font-weight: 600; color: var(--text-muted); }
         .flow-icon { font-size: 3rem; display: block; margin-bottom: 10px; }
         .flow-arrow { font-size: 2rem; color: var(--primary); font-weight: bold; opacity: 0.6; }
 
-        .chat-container { border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; background: white; width: 100%; max-width: 700px; margin: 20px auto; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: column; }
+        .chat-container { border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; background: white; width: 100%; max-width: 700px; margin: 20px auto; display: flex; flex-direction: column; }
         .bubble { padding: 16px 22px; border-radius: 22px; margin-bottom: 15px; font-size: 1.05rem; max-width: 85%; }
         
-        /* Uppdaterad chattspegling */
         .ai-response { background: #f1f5f9; color: var(--text-main); border-bottom-left-radius: 4px; align-self: flex-start; }
         .user-question { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-bottom-right-radius: 4px; align-self: flex-end; }
 
@@ -197,7 +229,8 @@
             .flow-arrow { transform: rotate(90deg); }
             .image-box.tall-box { height: 500px; }
             .price-section { flex-direction: column; text-align: center; gap: 40px; padding: 50px; }
-            header { padding: 80px 20px 140px; }
+            header { padding: 60px 20px 140px; }
+            .nav-container { margin-top: 25px; }
         }
     </style>
 </head>
@@ -207,11 +240,18 @@
     <span class="badge">Early Access Analys</span>
     <h1>Nume.ai</h1>
     <p>The Operating System for Finance Teams</p>
+    
+    <div class="nav-container">
+        <a href="#om-oss" class="nav-link">Om oss</a>
+        <a href="#syfte" class="nav-link">Syfte & Funktion</a>
+        <a href="#interaktion" class="nav-link">AI-Interaktion</a>
+        <a href="#analys" class="nav-link">Min Analys</a>
+    </div>
 </header>
 
 <div class="container">
     <div class="grid">
-        <div class="card card-left">
+        <div class="card card-left" id="om-oss">
             <div class="live-status"><span class="pulse-dot"></span>Live Analysis Active</div>
             <h2>Om Nume.ai</h2>
             <p><strong>Nume.ai</strong> är framtaget av Scaleup Finance för att lösa ett av de största problemen för startups: bristen på finansiell överblick i realtid.</p>
@@ -230,10 +270,10 @@
             <p>Genom att använda stora språkmodeller (LLMs) som är specialtränade på finansiell terminologi, kan Nume förstå komplexa samband mellan intäkter och utgifter.</p>
 
             <h3>Säkerhet & Integritet</h3>
-            <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. AI:n har endast läsrättigheter – den kan alltså aldrig flytta pengar utan din tillåtelse.</p>
+            <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. AI:n har endast läsrättigheter – den kan altså aldrig flytta pengar utan din tillåtelse.</p>
         </div>
 
-        <div class="card card-right">
+        <div class="card card-right" id="syfte">
             <h2>Syfte & Funktioner</h2>
             <p>Huvudsyftet med Nume är att sätta företagets finansiella hälsa på "autopilot", vilket sparar tid för både VD och ekonomiteam.</p>
             
@@ -249,7 +289,7 @@
             </ul>
         </div>
 
-        <div class="card full-width card-bottom">
+        <div class="card full-width card-bottom" id="interaktion">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 60px; align-items: center;">
                 <div>
                     <h2>AI-Interaktion & Flöde</h2>
@@ -283,7 +323,7 @@
         </div>
     </div>
 
-    <div class="card card-bottom" style="margin-top: 35px;">
+    <div class="card card-bottom" style="margin-top: 35px;" id="analys">
         <h2>Min Analys</h2>
         <p>Nume.ai representerar den nya vågen av "Agentic AI". Det är inte bara en databas, utan en aktiv partner. För företag innebär detta att de kan skala utan att drabbas av administrativ skuld. Det är ett perfekt exempel på hur nischad AI skapar verkligt affärsvärde.</p>
     </div>
