@@ -22,7 +22,7 @@
 
         html { scroll-behavior: smooth; }
 
-        /* Animationer */
+        /* --- ANIMATIONER (ÅTERSTÄLLDA) --- */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -42,6 +42,7 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            animation: fadeInUp 1s ease-out;
         }
 
         /* NAVIGERING */
@@ -140,6 +141,11 @@
             z-index: 50;
         }
 
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12);
+        }
+
         .full-width { grid-column: 1 / -1; }
 
         .live-status {
@@ -172,16 +178,17 @@
             border: 1px solid #e2e8f0;
             position: relative;
         }
-        .image-box.dark-bg { background: #000; border-color: #333; } /* Special för din nya bild */
+        /* PERFEKT BILDANPASSNING FÖR DIN NYA BILD */
+        .image-box.dark-bg { background: #000; border-color: #333; height: auto; } 
         .image-box.tall-box { height: 800px; }
         
         .image-box img { 
-            width: 100%; height: 100%; object-fit: contain; /* Contain så hela bilden syns */
+            width: 100%; height: auto; display: block;
             transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
         }
-        .image-box:hover img { transform: scale(1.04); }
+        .image-box.tall-box img { height: 100%; object-fit: cover; }
+        .image-box:hover img { transform: scale(1.05); }
 
-        /* Onboarding Steg Styling */
         .step-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -193,7 +200,9 @@
             padding: 20px;
             border-radius: 15px;
             border: 1px solid #e2e8f0;
+            transition: 0.3s;
         }
+        .step-card:hover { background: #fff; transform: translateY(-5px); border-color: var(--primary); }
         .step-num {
             background: var(--primary);
             color: var(--dark);
@@ -208,17 +217,13 @@
             display: flex; justify-content: space-around; align-items: center; 
             margin: 35px 0; padding: 40px; background: #f8fafc; border-radius: 20px; border: 1px solid #edf2f7; 
         }
-        .flow-item { 
-            text-align: center; font-size: 1rem; font-weight: 600; color: var(--text-muted); 
-            transition: 0.3s; cursor: pointer; 
-        }
-        .flow-item:hover { color: var(--primary); transform: translateY(-5px); }
-        .flow-icon { font-size: 3rem; display: block; margin-bottom: 10px; transition: 0.3s; }
-        .flow-item:hover .flow-icon { transform: scale(1.15); }
+        .flow-item { text-align: center; font-size: 1rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: 0.3s;}
+        .flow-item:hover { color: var(--primary); }
+        .flow-icon { font-size: 3rem; display: block; margin-bottom: 10px; }
         .flow-arrow { font-size: 2rem; color: var(--primary); font-weight: bold; opacity: 0.6; }
 
         .chat-container { border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; background: white; width: 100%; max-width: 700px; margin: 20px auto; display: flex; flex-direction: column; }
-        .bubble { padding: 16px 22px; border-radius: 22px; margin-bottom: 15px; font-size: 1.05rem; max-width: 85%; line-height: 1.4; }
+        .bubble { padding: 16px 22px; border-radius: 22px; margin-bottom: 15px; font-size: 1.05rem; max-width: 85%; line-height: 1.4; transition: 0.3s; }
         .ai-response { background: #f1f5f9; color: var(--text-main); border-bottom-left-radius: 4px; align-self: flex-start; }
         .user-question { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-bottom-right-radius: 4px; align-self: flex-end; }
 
@@ -233,15 +238,14 @@
         }
 
         .cta-button { background: var(--primary); color: var(--dark); padding: 20px 50px; border-radius: 15px; text-decoration: none; font-weight: 800; transition: 0.3s; font-size: 1.2rem; }
+        .cta-button:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 210, 255, 0.4); }
 
         footer { text-align: center; padding: 120px 40px; color: var(--text-muted); font-size: 1.1rem; }
 
         @media (max-width: 1024px) {
             nav { justify-content: flex-start; overflow-x: auto; padding: 10px 15px; }
             .grid { grid-template-columns: 1fr; }
-            .container { width: 96%; margin-top: -80px; padding: 0 10px; }
-            .image-box { height: 250px; }
-            .image-box.tall-box { height: 400px; }
+            .price-section { flex-direction: column; text-align: center; padding: 40px 20px; gap: 30px; }
         }
     </style>
 </head>
@@ -355,14 +359,14 @@
                     </div>
                     
                     <div style="background: #fff9eb; padding: 30px; border-left: 5px solid #f59e0b; border-radius: 15px; font-size: 1.1rem; color: #92400e;">
-                        <strong>Etisk notering:</strong> För att undvika hallucinationer använder Nume deterministisk logik för beräkningar kombinerat med LLM för tolkning och kommunikation.
+                        <strong>Etisk notering:</strong> För att undvika hallucinationer använder Nume deterministisk logik för beräkningar kombinerat med LLM för tolkning.
                     </div>
                 </div>
 
                 <div>
                     <div class="chat-container">
-                        <div class="bubble user-question">"Hur ser vår kassa ut om 3 månader om vi anställer två säljare till i juni?"</div>
-                        <div class="bubble ai-response">"Baserat på er nuvarande burn-rate och den estimerade lönekostnaden beräknas ni ha 1.2M SEK i likvida medel vid slutet av augusti."</div>
+                        <div class="bubble user-question">"Hur ser vår kassa ut om 3 månader?"</div>
+                        <div class="bubble ai-response">"Baserat på er nuvarande burn-rate beräknas ni ha 1.2M SEK kvar vid slutet av augusti."</div>
                     </div>
                 </div>
             </div>
@@ -384,7 +388,6 @@
 
     <footer>
         <p>Skapad av <strong>Otto Jedeur-Palmgren</strong> | Kurs: AI1 | 2026</p>
-        <p style="margin-top: 20px;">Källor: <a href="https://theresanaiforthat.com/" target="_blank" style="color: var(--secondary); text-decoration: none;">TAAFT</a> & <a href="https://www.nume.ai" target="_blank" style="color: var(--secondary); text-decoration: none;">Nume.ai</a></p>
     </footer>
 </div>
 
@@ -395,9 +398,11 @@
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
+                // Ta bort gamla markeringar
                 document.querySelectorAll('.card').forEach(c => c.classList.remove('highlight'));
                 document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
                 
+                // Aktivera ny
                 this.classList.add('active');
                 setTimeout(() => {
                     targetElement.classList.add('highlight');
