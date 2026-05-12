@@ -172,12 +172,14 @@
             border: 1px solid #e2e8f0;
             position: relative;
         }
+        .image-box.dark-bg { background: #000; border-color: #333; } /* Special för din nya bild */
         .image-box.tall-box { height: 800px; }
+        
         .image-box img { 
-            width: 100%; height: 100%; object-fit: cover; 
+            width: 100%; height: 100%; object-fit: contain; /* Contain så hela bilden syns */
             transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
         }
-        .image-box:hover img { transform: scale(1.08); }
+        .image-box:hover img { transform: scale(1.04); }
 
         /* Onboarding Steg Styling */
         .step-container {
@@ -238,6 +240,8 @@
             nav { justify-content: flex-start; overflow-x: auto; padding: 10px 15px; }
             .grid { grid-template-columns: 1fr; }
             .container { width: 96%; margin-top: -80px; padding: 0 10px; }
+            .image-box { height: 250px; }
+            .image-box.tall-box { height: 400px; }
         }
     </style>
 </head>
@@ -303,8 +307,8 @@
             <h2>Uppstartsprocess – Kom igång med Nume</h2>
             <p>Att integrera AI i ditt finansflöde är enkelt. Här är de fem stegen för att lansera din personliga AI-assistent:</p>
             
-            <div class="image-box">
-                <img src="image_fbd1ba.png" alt="Nume Onboarding Process">
+            <div class="image-box dark-bg">
+                <img src="onboarding.png" alt="Nume Onboarding Process">
             </div>
 
             <div class="step-container">
@@ -359,11 +363,6 @@
                     <div class="chat-container">
                         <div class="bubble user-question">"Hur ser vår kassa ut om 3 månader om vi anställer två säljare till i juni?"</div>
                         <div class="bubble ai-response">"Baserat på er nuvarande burn-rate och den estimerade lönekostnaden beräknas ni ha 1.2M SEK i likvida medel vid slutet av augusti."</div>
-                    </div>
-                    <div style="text-align: center; margin-top: 20px;">
-                        <span class="tech-pill">GPT-4o</span>
-                        <span class="tech-pill">RAG Engine</span>
-                        <span class="tech-pill">Financial LLM</span>
                     </div>
                 </div>
             </div>
