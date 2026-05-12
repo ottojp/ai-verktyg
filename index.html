@@ -22,7 +22,7 @@
 
         html { scroll-behavior: smooth; }
 
-        /* --- ANIMATIONER (ÅTERSTÄLLDA) --- */
+        /* Animationer */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -32,6 +32,17 @@
             0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
             70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        /* Scroll-reveal klass för bubblorna */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -141,11 +152,6 @@
             z-index: 50;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12);
-        }
-
         .full-width { grid-column: 1 / -1; }
 
         .live-status {
@@ -178,7 +184,6 @@
             border: 1px solid #e2e8f0;
             position: relative;
         }
-        /* PERFEKT BILDANPASSNING FÖR DIN NYA BILD */
         .image-box.dark-bg { background: #000; border-color: #333; height: auto; } 
         .image-box.tall-box { height: 800px; }
         
@@ -202,7 +207,7 @@
             border: 1px solid #e2e8f0;
             transition: 0.3s;
         }
-        .step-card:hover { background: #fff; transform: translateY(-5px); border-color: var(--primary); }
+        .step-card:hover { transform: translateY(-5px); border-color: var(--primary); background: #fff; }
         .step-num {
             background: var(--primary);
             color: var(--dark);
@@ -213,21 +218,22 @@
             margin-bottom: 10px;
         }
 
+        /* --- FLÖDES ANIMATIONER ÅTERSTÄLLDA --- */
         .flow-wrapper { 
             display: flex; justify-content: space-around; align-items: center; 
             margin: 35px 0; padding: 40px; background: #f8fafc; border-radius: 20px; border: 1px solid #edf2f7; 
         }
         .flow-item { text-align: center; font-size: 1rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: 0.3s;}
-        .flow-item:hover { color: var(--primary); }
-        .flow-icon { font-size: 3rem; display: block; margin-bottom: 10px; }
+        .flow-item:hover { color: var(--primary); transform: translateY(-10px); }
+        .flow-icon { font-size: 3rem; display: block; margin-bottom: 10px; transition: 0.3s; }
+        .flow-item:hover .flow-icon { transform: scale(1.2); filter: drop-shadow(0 0 10px var(--primary)); }
         .flow-arrow { font-size: 2rem; color: var(--primary); font-weight: bold; opacity: 0.6; }
 
         .chat-container { border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; background: white; width: 100%; max-width: 700px; margin: 20px auto; display: flex; flex-direction: column; }
-        .bubble { padding: 16px 22px; border-radius: 22px; margin-bottom: 15px; font-size: 1.05rem; max-width: 85%; line-height: 1.4; transition: 0.3s; }
+        .bubble { padding: 16px 22px; border-radius: 22px; margin-bottom: 15px; font-size: 1.05rem; max-width: 85%; line-height: 1.4; }
         .ai-response { background: #f1f5f9; color: var(--text-main); border-bottom-left-radius: 4px; align-self: flex-start; }
         .user-question { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-bottom-right-radius: 4px; align-self: flex-end; }
 
-        .tech-pill { background: #f1f5f9; color: #475569; padding: 8px 16px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; margin-right: 10px; display: inline-block; border: 1px solid #e2e8f0; }
         .feature-list li { padding-left: 40px; position: relative; margin-bottom: 22px; font-size: 1.1rem; list-style: none;}
         .feature-list li::before { content: '✦'; position: absolute; left: 0; color: var(--primary); font-weight: bold; font-size: 1.3rem; }
 
@@ -245,16 +251,16 @@
         @media (max-width: 1024px) {
             nav { justify-content: flex-start; overflow-x: auto; padding: 10px 15px; }
             .grid { grid-template-columns: 1fr; }
-            .price-section { flex-direction: column; text-align: center; padding: 40px 20px; gap: 30px; }
+            .price-section { flex-direction: column; text-align: center; gap: 30px; }
         }
     </style>
 </head>
 <body>
 
 <nav>
+    <a href="#syfte" class="nav-link">Syfte & Funktion</a>
     <a href="#om-oss" class="nav-link">Om oss</a>
     <a href="#uppstart" class="nav-link">Uppstart</a>
-    <a href="#syfte" class="nav-link">Syfte & Funktion</a>
     <a href="#interaktion" class="nav-link">AI-Interaktion</a>
     <a href="#analys" class="nav-link">Min Analys</a>
 </nav>
@@ -267,29 +273,7 @@
 
 <div class="container">
     <div class="grid">
-        <div class="card" id="om-oss">
-            <div class="live-status"><span class="pulse-dot"></span>Live Analysis Active</div>
-            <h2>Om Nume.ai</h2>
-            <p><strong>Nume.ai</strong> är framtaget av Scaleup Finance för att lösa ett av de största problemen för startups: bristen på finansiell överblick i realtid.</p>
-            
-            <div class="image-box">
-                <img src="startsida.png" alt="Nume.ai Dashboard">
-            </div>
-
-            <h3>Hur det fungerar</h3>
-            <p>Verktyget agerar som ett "intelligent lager" ovanpå din befintliga bank och bokföring. Istället för att logga in i flera olika system, samlar Nume in all data och presenterar den i ett enkelt format direkt via webben eller Slack.</p>
-            
-            <h3>Sömlösa Integrationer</h3>
-            <p>För att uppnå full funktionalitet kopplar Nume.ai ihop sig med marknadsledande system som <strong>Fortnox, QuickBooks, och Stripe</strong>. Genom säkra API-anslutningar flödar transaktionsdata oavbrutet, vilket eliminerar behovet av manuell export.</p>
-            
-            <h3>Tekniken bakom</h3>
-            <p>Genom att använda stora språkmodeller (LLMs) som är specialtränade på finansiell terminologi, kan Nume förstå komplexa samband mellan intäkter och utgifter på ett sätt som traditionella kalkylblad aldrig kan.</p>
-
-            <h3>Säkerhet & Integritet</h3>
-            <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. AI:n har endast läsrättigheter – den kan alltså aldrig flytta pengar eller genomföra transaktioner utan din tillåtelse.</p>
-        </div>
-
-        <div class="card" id="syfte">
+        <div class="card reveal" id="syfte">
             <h2>Syfte & Funktioner</h2>
             <p>Huvudsyftet med Nume är att sätta företagets finansiella hälsa på "autopilot", vilket sparar hundratals timmar för både VD och ekonomiteam varje år.</p>
             
@@ -307,7 +291,29 @@
             <p style="margin-top: 20px;">Genom att automatisera datainsamlingen kan teamet fokusera på strategiska beslut istället för att jaga kvitton och matcha transaktioner manuellt.</p>
         </div>
 
-        <div class="card full-width" id="uppstart">
+        <div class="card reveal" id="om-oss">
+            <div class="live-status"><span class="pulse-dot"></span>Live Analysis Active</div>
+            <h2>Om Nume.ai</h2>
+            <p><strong>Nume.ai</strong> är framtaget av Scaleup Finance för att lösa ett av de största problemen för startups: bristen på finansiell överblick i realtid.</p>
+            
+            <div class="image-box">
+                <img src="startsida.png" alt="Nume.ai Dashboard">
+            </div>
+
+            <h3>Hur det fungerar</h3>
+            <p>Verktyget agerar som ett "intelligent lager" ovanpå din befintliga bank och bokföring. Istället för att logga in i flera olika system, samlar Nume in all data och presenterar den i ett enkelt format direkt via webben eller Slack.</p>
+            
+            <h3>Sömlösa Integrationer</h3>
+            <p>För att uppnå full funktionalitet kopplar Nume.ai ihop sig med marknadsledande system som <strong>Fortnox, QuickBooks, och Stripe</strong>. Genom säkra API-anslutningar flödar transaktionsdata oavbrutet.</p>
+            
+            <h3>Tekniken bakom</h3>
+            <p>Genom att använda stora språkmodeller (LLMs) som är specialtränade på finansiell terminologi, kan Nume förstå komplexa samband mellan intäkter och utgifter på ett sätt som traditionella kalkylblad aldrig kan.</p>
+
+            <h3>Säkerhet & Integritet</h3>
+            <p>Då finansiell data är känslig, använder Nume <strong>SOC-2 certifierad säkerhet</strong>. AI:n har endast läsrättigheter – den kan alltså aldrig flytta pengar eller genomföra transaktioner utan din tillåtelse.</p>
+        </div>
+
+        <div class="card full-width reveal" id="uppstart">
             <h2>Uppstartsprocess – Kom igång med Nume</h2>
             <p>Att integrera AI i ditt finansflöde är enkelt. Här är de fem stegen för att lansera din personliga AI-assistent:</p>
             
@@ -316,35 +322,15 @@
             </div>
 
             <div class="step-container">
-                <div class="step-card">
-                    <div class="step-num">1</div>
-                    <strong>Connect Accounting</strong>
-                    <p>Koppla ihop ditt bokföringssystem (t.ex. Fortnox) för historisk data.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">2</div>
-                    <strong>Connect Bank</strong>
-                    <p>Säker anslutning till dina bankkonton för realtidsuppdatering.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">3</div>
-                    <strong>Connect Slack/Email</strong>
-                    <p>Välj var du vill få dina rapporter och ställa dina frågor.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">4</div>
-                    <strong>Interview</strong>
-                    <p>En kort genomgång där AI:n lär sig din specifika affärsmodell.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">5</div>
-                    <strong>Launch</strong>
-                    <p>Din AI är redo! Nu får du dagliga insikter och full kontroll.</p>
-                </div>
+                <div class="step-card"><div class="step-num">1</div><strong>Connect Accounting</strong><p>Koppla ihop ditt bokföringssystem (t.ex. Fortnox) för historisk data.</p></div>
+                <div class="step-card"><div class="step-num">2</div><strong>Connect Bank</strong><p>Säker anslutning till dina bankkonton för realtidsuppdatering.</p></div>
+                <div class="step-card"><div class="step-num">3</div><strong>Connect Slack/Email</strong><p>Välj var du vill få dina rapporter och ställa dina frågor.</p></div>
+                <div class="step-card"><div class="step-num">4</div><strong>Interview</strong><p>En kort genomgång där AI:n lär sig din specifika affärsmodell.</p></div>
+                <div class="step-card"><div class="step-num">5</div><strong>Launch</strong><p>Din AI är redo! Nu får du dagliga insikter och full kontroll.</p></div>
             </div>
         </div>
 
-        <div class="card full-width" id="interaktion">
+        <div class="card full-width reveal" id="interaktion">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 60px; align-items: center;">
                 <div>
                     <h2>AI-Interaktion & Flöde</h2>
@@ -356,10 +342,6 @@
                         <div class="flow-item"><span class="flow-icon">⚙️</span>AI-ANALYS</div>
                         <div class="flow-arrow">→</div>
                         <div class="flow-item"><span class="flow-icon">📊</span>INSIKT</div>
-                    </div>
-                    
-                    <div style="background: #fff9eb; padding: 30px; border-left: 5px solid #f59e0b; border-radius: 15px; font-size: 1.1rem; color: #92400e;">
-                        <strong>Etisk notering:</strong> För att undvika hallucinationer använder Nume deterministisk logik för beräkningar kombinerat med LLM för tolkning.
                     </div>
                 </div>
 
@@ -373,12 +355,12 @@
         </div>
     </div>
 
-    <div class="card" style="margin-top: 35px;" id="analys">
+    <div class="card reveal" style="margin-top: 35px;" id="analys">
         <h2>Min Analys</h2>
-        <p>Nume.ai representerar den nya vågen av "Agentic AI". Det är inte bara en passiv databas, utan en aktiv partner som proaktivt flaggar för avvikelser. För företag innebär detta att de kan skala snabbare utan att drabbas av administrativ skuld. Det är ett perfekt exempel på hur nischad AI, som fokuserar på en specifik vertikal (finans), skapar betydligt mer värde än generella verktyg.</p>
+        <p>Nume.ai representerar den nya vågen av "Agentic AI". Det är inte bara en passiv databas, utan en aktiv partner som proaktivt flaggar för avvikelser. För företag innebär detta att de kan skala snabbare utan att drabbas av administrativ skuld. Det är ett perfekt exempel på hur nischad AI skapar betydligt mer värde än generella verktyg.</p>
     </div>
 
-    <div class="price-section">
+    <div class="price-section reveal">
         <div>
             <h3 style="color: var(--primary); margin: 0; font-size: 1.8rem;">Redo att börja?</h3>
             <p style="font-size: 1.2rem;">Testa Nume.ai gratis i 14 dagar.</p>
@@ -387,26 +369,36 @@
     </div>
 
     <footer>
-        <p>Skapad av <strong>Otto Jedeur-Palmgren</strong> | Kurs: AI1 | 2026</p>
+        <p>Skapad av <strong>Otto Jedeur-Palmgren</strong> | 2026</p>
     </footer>
 </div>
 
 <script>
+    // Scroll Reveal Skript
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 100;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
+        }
+    }
+    window.addEventListener("scroll", reveal);
+    reveal(); // Kör vid start
+
+    // Nav-link highlight
     document.querySelectorAll('.nav-link').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            
             if (targetElement) {
-                // Ta bort gamla markeringar
                 document.querySelectorAll('.card').forEach(c => c.classList.remove('highlight'));
                 document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
-                
-                // Aktivera ny
                 this.classList.add('active');
-                setTimeout(() => {
-                    targetElement.classList.add('highlight');
-                }, 300);
+                setTimeout(() => { targetElement.classList.add('highlight'); }, 300);
             }
         });
     });
